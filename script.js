@@ -90,22 +90,66 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Inquiry Form Handler
+  // Inquiry Form Handler -> zkfn1125@gmail.com
   const inquiryForm = document.getElementById('inquiry-form');
   if (inquiryForm) {
-    inquiryForm.addEventListener('submit', (e) => {
+    const submitBtn = inquiryForm.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.innerHTML : '견적 신청하기';
+
+    inquiryForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const businessType = inquiryForm.querySelector('input[name="businessType"]:checked')?.value || '선택 안됨';
       const selectedServices = Array.from(inquiryForm.querySelectorAll('input[name="services"]:checked'))
         .map((cb) => cb.value);
-      const name = document.getElementById('custName')?.value || '';
-      const phone = document.getElementById('custPhone')?.value || '';
+      const name = document.getElementById('custName')?.value.trim() || '';
+      const phone = document.getElementById('custPhone')?.value.trim() || '';
+      const memo = document.getElementById('custMemo')?.value.trim() || '없음';
 
       const serviceListText = selectedServices.length > 0 ? selectedServices.join(', ') : '선택 없음';
 
-      alert(`[비공개 견적 신청 완료]\n성함/상호: ${name} (${phone})\n업종: ${businessType}\n선택 품목: ${serviceListText}\n\n폐쇄몰 제휴 특가 정책이 정상 적용되었습니다! 전담 VIP 매니저가 비공개 최대 지원금을 확인 후 신속히 연락드리겠습니다.`);
-      inquiryForm.reset();
+      // Button loading state
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>메일 전송 중입니다...</span>';
+      }
+
+      try {
+        const payload = {
+          "_subject": `[오픈케어 견적문의] ${name} 사장님 (${phone})`,
+          "_template": "table",
+          "고객 성함 / 상호명": name,
+          "연락처": phone,
+          "사업장 형태": businessType,
+          "선택한 5대 설비 품목": serviceListText,
+          "오픈 예정일 및 문의 내용": memo,
+          "신청 일시": new Date().toLocaleString('ko-KR')
+        };
+
+        const response = await fetch("https://formsubmit.co/ajax/zkfn1125@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          alert(`[견적 신청 완료]\n성함/상호: ${name} (${phone})\n선택 품목: ${serviceListText}\n\n작성하신 내용이 대표님 이메일(zkfn1125@gmail.com)로 정상 발송되었습니다! 확인 후 신속히 연락드리겠습니다.`);
+          inquiryForm.reset();
+        } else {
+          alert('전송 중 일시적인 오류가 발생했습니다. 잠시 후 다시 시도해 주시거나 1588-0000으로 문의해 주세요.');
+        }
+      } catch (err) {
+        console.error('Submit error:', err);
+        alert('전송 중 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+      }
     });
   }
 });
