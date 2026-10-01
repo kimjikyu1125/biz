@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
       button.addEventListener('click', () => {
         const isHidden = answer.classList.contains('hidden');
 
-        // Close other items
         faqItems.forEach((other) => {
           if (other !== item) {
             const otherAnswer = other.querySelector('.faq-answer');
@@ -71,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Close modals
   closeButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       if (modalTerms) modalTerms.classList.add('hidden');
@@ -79,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Close modal when clicking background overlay
   [modalTerms, modalPrivacy].forEach((modal) => {
     if (modal) {
       modal.addEventListener('click', (e) => {
@@ -108,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const serviceListText = selectedServices.length > 0 ? selectedServices.join(', ') : '선택 없음';
 
-      // Button loading state
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span>메일 전송 중입니다...</span>';
@@ -118,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const payload = {
           "_subject": `[오픈케어 견적문의] ${name} 사장님 (${phone})`,
           "_template": "table",
+          "_captcha": "false",
           "고객 성함 / 상호명": name,
           "연락처": phone,
           "사업장 형태": businessType,
@@ -135,11 +132,15 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(payload)
         });
 
-        if (response.ok) {
-          alert(`[견적 신청 완료]\n성함/상호: ${name} (${phone})\n선택 품목: ${serviceListText}\n\n작성하신 내용이 대표님 이메일(zkfn1125@gmail.com)로 정상 발송되었습니다! 확인 후 신속히 연락드리겠습니다.`);
+        const data = await response.json();
+
+        if (data.success === "true" || data.success === true) {
+          alert(`[견적 신청 완료]\n성함/상호: ${name} (${phone})\n선택 품목: ${serviceListText}\n\n신청 내용이 대표님 이메일(zkfn1125@gmail.com)로 즉시 전송되었습니다!`);
           inquiryForm.reset();
+        } else if (data.message && data.message.includes('Activation')) {
+          alert(`[최초 1회 인증 필요]\n구글 메일(zkfn1125@gmail.com)로 FormSubmit 인증 메일이 발송되었습니다!\n\n메일함(또는 스팸함)에서 'Activate Form' 파란색 버튼을 딱 한 번만 눌러주시면 다음부터 정상 수신됩니다.`);
         } else {
-          alert('전송 중 일시적인 오류가 발생했습니다. 잠시 후 다시 시도해 주시거나 1588-0000으로 문의해 주세요.');
+          alert(`전송 결과: ${data.message || '접수되었습니다.'}`);
         }
       } catch (err) {
         console.error('Submit error:', err);
