@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenu.classList.toggle('hidden');
     });
 
-    // Close mobile menu when clicking menu items
     mobileMenu.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
@@ -42,13 +41,50 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        // Toggle current item
         if (isHidden) {
           answer.classList.remove('hidden');
           if (chevron) chevron.classList.add('rotate-180');
         } else {
           answer.classList.add('hidden');
           if (chevron) chevron.classList.remove('rotate-180');
+        }
+      });
+    }
+  });
+
+  // Modal Handlers (이용약관, 개인정보처리방침)
+  const modalTerms = document.getElementById('modal-terms');
+  const modalPrivacy = document.getElementById('modal-privacy');
+  const btnOpenTerms = document.getElementById('btn-open-terms');
+  const btnOpenPrivacy = document.getElementById('btn-open-privacy');
+  const closeButtons = document.querySelectorAll('.btn-close-modal');
+
+  if (btnOpenTerms && modalTerms) {
+    btnOpenTerms.addEventListener('click', () => {
+      modalTerms.classList.remove('hidden');
+    });
+  }
+
+  if (btnOpenPrivacy && modalPrivacy) {
+    btnOpenPrivacy.addEventListener('click', () => {
+      modalPrivacy.classList.remove('hidden');
+    });
+  }
+
+  // Close modals
+  closeButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (modalTerms) modalTerms.classList.add('hidden');
+      if (modalPrivacy) modalPrivacy.classList.add('hidden');
+    });
+  });
+
+  // Close modal when clicking background overlay
+  [modalTerms, modalPrivacy].forEach((modal) => {
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.add('hidden');
         }
       });
     }
@@ -68,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const serviceListText = selectedServices.length > 0 ? selectedServices.join(', ') : '선택 없음';
 
-      alert(`[견적 신청 완료]\n성함/상호: ${name} (${phone})\n업종: ${businessType}\n선택 품목: ${serviceListText}\n\n신청이 정상 접수되었습니다! 담당 매니저가 최대 결합 혜택을 확인 후 24시간 내 연락드리겠습니다.`);
+      alert(`[비공개 견적 신청 완료]\n성함/상호: ${name} (${phone})\n업종: ${businessType}\n선택 품목: ${serviceListText}\n\n폐쇄몰 제휴 특가 정책이 정상 적용되었습니다! 전담 VIP 매니저가 비공개 최대 지원금을 확인 후 신속히 연락드리겠습니다.`);
       inquiryForm.reset();
     });
   }
