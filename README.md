@@ -9,10 +9,16 @@
 4. **하이오더 (테이블오더)**: 홀 인건비 절감 & 주문 누락 방지 (음식점/카페 특화)
 5. **정수기 (업소용/오피스)**: 대용량 스탠드 및 탕비실 직수 정수기 렌탈 (필터/위생 케어)
 
+## 🌐 실시간 웹사이트 접속 주소
+- **메인 주소 (Vercel)**: [https://opencare-biz.vercel.app](https://opencare-biz.vercel.app)
+- **보조 주소 (GitHub Pages)**: [https://kimjikyu1125.github.io/biz](https://kimjikyu1125.github.io/biz)
+
 ## 📁 파일 구조
-- [index.html](file:///C:/Users/jeoni/.gemini/antigravity/scratch/business-package-site/index.html) : 메인 랜딩 페이지 (5대 품목 소개, 업종별 패키지 비교, 결합 혜택, 실시간 견적 신청 폼)
-- [script.js](file:///C:/Users/jeoni/.gemini/antigravity/scratch/business-package-site/script.js) : 모바일 메뉴 토글, FAQ 아코디언, 품목 다중 선택 견적 접수 핸들러
-- [README.md](file:///C:/Users/jeoni/.gemini/antigravity/scratch/business-package-site/README.md) : 프로젝트 설명 및 가이드
+- [index.html](file:///C:/Users/jeoni/.gemini/antigravity-ide/scratch/biz/index.html) : 메인 랜딩 페이지
+- [script.js](file:///C:/Users/jeoni/.gemini/antigravity-ide/scratch/biz/script.js) : 인터랙션 및 고객 견적 접수 핸들러
+- [AGENTS.md](file:///C:/Users/jeoni/.gemini/antigravity-ide/scratch/biz/AGENTS.md) : AI 프로젝트 가이드 및 작업 규칙
+- [CHANGELOG.md](file:///C:/Users/jeoni/.gemini/antigravity-ide/scratch/biz/CHANGELOG.md) : 매일 작업 히스토리 누적 기록
+- [README.md](file:///C:/Users/jeoni/.gemini/antigravity-ide/scratch/biz/README.md) : 프로젝트 설명 및 가이드
 
 ## 🚀 확인 방법
-- 파일 탐색기에서 [index.html](file:///C:/Users/jeoni/.gemini/antigravity/scratch/business-package-site/index.html)을 더블 클릭하여 Chrome, Edge 등 브라우저로 바로 확인하실 수 있습니다.
+- 인터넷 브라우저에서 [https://opencare-biz.vercel.app](https://opencare-biz.vercel.app)에 접속하여 언제든 실시간 확인하실 수 있습니다.

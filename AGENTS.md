@@ -11,7 +11,8 @@
 
 ## 📌 프로젝트 개요
 - **프로젝트명**: 오픈케어 (OpenCare) - 소상공인 5대 필수 설비 비공개 혜택몰
-- **배포 주소**: `https://kimjikyu1125.github.io/biz`
+- **배포 주소 (메인)**: `https://opencare-biz.vercel.app`
+- **배포 주소 (서브)**: `https://kimjikyu1125.github.io/biz`
 - **관리자 이메일**: `zkfn1125@gmail.com`
 - **주요 설비 라인업**:
   1. CCTV (ADT캡스)
