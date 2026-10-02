@@ -20,8 +20,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // FAQ Accordion
+  // FAQ Category Filter
+  const faqFilterBtns = document.querySelectorAll('.faq-filter-btn');
   const faqItems = document.querySelectorAll('.faq-item');
+
+  faqFilterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      faqFilterBtns.forEach((b) => {
+        b.classList.remove('bg-blue-600', 'text-white', 'shadow-md', 'font-bold');
+        b.classList.add('bg-slate-100', 'text-slate-700', 'hover:bg-slate-200', 'font-semibold');
+      });
+      btn.classList.remove('bg-slate-100', 'text-slate-700', 'hover:bg-slate-200', 'font-semibold');
+      btn.classList.add('bg-blue-600', 'text-white', 'shadow-md', 'font-bold');
+
+      faqItems.forEach((item) => {
+        const cat = item.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+          const answer = item.querySelector('.faq-answer');
+          const chevron = item.querySelector('[data-lucide="chevron-down"]');
+          if (answer) answer.classList.add('hidden');
+          if (chevron) chevron.classList.remove('rotate-180');
+        }
+      });
+    });
+  });
+
+  // FAQ Accordion
   faqItems.forEach((item) => {
     const button = item.querySelector('button');
     const answer = item.querySelector('.faq-answer');
