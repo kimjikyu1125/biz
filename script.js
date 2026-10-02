@@ -107,10 +107,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span>메일 전송 중입니다...</span>';
+        submitBtn.innerHTML = '<span>신청 접수 중입니다...</span>';
       }
 
       try {
+        const now = new Date().toLocaleString('ko-KR');
+
+        // 1. 텔레그램 봇 실시간 알림 전송
+        const telegramToken = "8924688857:AAGUnyWhwUmsIXeL2ZEnZxeGoG-lL0smtfc";
+        const telegramChatId = "1273571393";
+        const tgText = `🔔 <b>[오픈케어 신규 견적 접수]</b>\n\n` +
+          `👤 <b>성함/상호명:</b> ${name}\n` +
+          `📞 <b>연락처:</b> ${phone}\n` +
+          `🏢 <b>사업장 형태:</b> ${businessType}\n` +
+          `📦 <b>선택 설비 품목:</b> ${serviceListText}\n` +
+          `📝 <b>문의/오픈일정:</b> ${memo}\n` +
+          `⏰ <b>신청 일시:</b> ${now}`;
+
+        fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: telegramChatId,
+            text: tgText,
+            parse_mode: "HTML"
+          })
+        }).catch((err) => console.warn('Telegram send error:', err));
+
+        // 2. 구글 이메일 백업 전송 (FormSubmit)
         const payload = {
           "_subject": `[오픈케어 견적문의] ${name} 사장님 (${phone})`,
           "_template": "table",
@@ -120,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
           "사업장 형태": businessType,
           "선택한 5대 설비 품목": serviceListText,
           "오픈 예정일 및 문의 내용": memo,
-          "신청 일시": new Date().toLocaleString('ko-KR')
+          "신청 일시": now
         };
 
         const response = await fetch("https://formsubmit.co/ajax/zkfn1125@gmail.com", {
@@ -134,14 +158,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const data = await response.json();
 
-        if (data.success === "true" || data.success === true) {
-          alert(`[견적 신청 완료]\n성함/상호: ${name} (${phone})\n선택 품목: ${serviceListText}\n\n신청 내용이 대표님 이메일(zkfn1125@gmail.com)로 즉시 전송되었습니다!`);
-          inquiryForm.reset();
-        } else if (data.message && data.message.includes('Activation')) {
-          alert(`[최초 1회 인증 필요]\n구글 메일(zkfn1125@gmail.com)로 FormSubmit 인증 메일이 발송되었습니다!\n\n메일함(또는 스팸함)에서 'Activate Form' 파란색 버튼을 딱 한 번만 눌러주시면 다음부터 정상 수신됩니다.`);
-        } else {
-          alert(`전송 결과: ${data.message || '접수되었습니다.'}`);
-        }
+        alert(`[견적 신청이 정상 접수되었습니다]\n\n성함/상호: ${name} (${phone})\n선택 품목: ${serviceListText}\n\n신청 내용이 담당자에게 실시간 전송되었습니다. 확인 후 신속하게 연락드리겠습니다!`);
+        inquiryForm.reset();
       } catch (err) {
         console.error('Submit error:', err);
         alert('전송 중 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.');
