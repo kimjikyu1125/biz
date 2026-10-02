@@ -14,6 +14,7 @@
 - **배포 주소 (메인)**: `https://opencare-biz.vercel.app`
 - **배포 주소 (서브)**: `https://kimjikyu1125.github.io/biz`
 - **관리자 이메일**: `zkfn1125@gmail.com`
+- **대표 상담 전화**: `010-7771-9526`
 - **텔레그램 알림 봇**: Token `8924688857:AAGUnyWhwUmsIXeL2ZEnZxeGoG-lL0smtfc` / Chat ID `1273571393`
 - **주요 설비 라인업**:
   1. CCTV (ADT캡스)
