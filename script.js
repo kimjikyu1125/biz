@@ -87,6 +87,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Kakao / Daum 우편번호 서비스 연동
+  const btnSearchAddr = document.getElementById('btn-search-addr');
+  const custAddressInput = document.getElementById('custAddress');
+  const custAddressDetailInput = document.getElementById('custAddressDetail');
+
+  function openPostcode() {
+    if (window.daum && window.daum.Postcode) {
+      new window.daum.Postcode({
+        oncomplete: function (data) {
+          let fullAddr = data.address;
+          let extraAddr = '';
+
+          if (data.addressType === 'R') {
+            if (data.bname !== '') {
+              extraAddr += data.bname;
+            }
+            if (data.buildingName !== '') {
+              extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ')' : '');
+          }
+
+          if (custAddressInput) {
+            custAddressInput.value = fullAddr;
+          }
+          if (custAddressDetailInput) {
+            custAddressDetailInput.focus();
+          }
+        }
+      }).open();
+    } else {
+      alert('우편번호 검색 서비스를 불러오는 중입니다. 잠시 후 다시 클릭해 주세요.');
+    }
+  }
+
+  if (btnSearchAddr) {
+    btnSearchAddr.addEventListener('click', openPostcode);
+  }
+  if (custAddressInput) {
+    custAddressInput.addEventListener('click', openPostcode);
+  }
+
   // Inquiry Form Handler -> zkfn1125@gmail.com & Telegram Bot
   const inquiryForm = document.getElementById('inquiry-form');
   if (inquiryForm) {
@@ -103,6 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const name = document.getElementById('custName')?.value.trim() || '';
       const phoneInput = document.getElementById('custPhone');
       const phone = phoneInput?.value.trim() || '';
+      const address = custAddressInput?.value.trim() || '';
+      const addressDetail = custAddressDetailInput?.value.trim() || '';
+      const fullAddress = address ? `${address} ${addressDetail}`.trim() : '미입력';
       const memo = document.getElementById('custMemo')?.value.trim() || '없음';
 
       // 2. 오접수 방지: 연락처 유효성 검사 (숫자 9~12자리)
@@ -149,12 +194,13 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const now = new Date().toLocaleString('ko-KR');
 
-        // 1. 텔레그램 봇 실시간 알림 전송
+        // 1. 텔레그램 봇 실시간 알림 전송 (설치 주소 포함)
         const telegramToken = "8924688857:AAGUnyWhwUmsIXeL2ZEnZxeGoG-lL0smtfc";
         const telegramChatId = "1273571393";
         const tgText = `🔔 <b>[오픈케어 신규 견적 접수]</b>\n\n` +
           `👤 <b>성함/상호명:</b> ${name}\n` +
           `📞 <b>연락처:</b> ${phone}\n` +
+          `📍 <b>설치 주소:</b> ${fullAddress}\n` +
           `🏢 <b>사업장 형태:</b> ${businessType}\n` +
           `📦 <b>선택 설비 품목:</b> ${serviceListText}\n` +
           `📝 <b>문의/오픈일정:</b> ${memo}\n` +
@@ -177,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
           "_captcha": "false",
           "고객 성함 / 상호명": name,
           "연락처": phone,
+          "설치 희망 주소": fullAddress,
           "사업장 형태": businessType,
           "선택한 5대 설비 품목": serviceListText,
           "오픈 예정일 및 문의 내용": memo,
