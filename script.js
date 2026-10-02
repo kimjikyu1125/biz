@@ -87,24 +87,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Inquiry Form Handler -> zkfn1125@gmail.com
+  // Inquiry Form Handler -> zkfn1125@gmail.com & Telegram Bot
   const inquiryForm = document.getElementById('inquiry-form');
   if (inquiryForm) {
     const submitBtn = inquiryForm.querySelector('button[type="submit"]');
     const originalBtnText = submitBtn ? submitBtn.innerHTML : '견적 신청하기';
+    let isSubmitting = false;
 
     inquiryForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      // 1. 중복 클릭 / 버튼 연타 원천 차단
+      if (isSubmitting) return;
+
+      const name = document.getElementById('custName')?.value.trim() || '';
+      const phoneInput = document.getElementById('custPhone');
+      const phone = phoneInput?.value.trim() || '';
+      const memo = document.getElementById('custMemo')?.value.trim() || '없음';
+
+      // 2. 오접수 방지: 연락처 유효성 검사 (숫자 9~12자리)
+      const cleanPhone = phone.replace(/[^0-9]/g, '');
+      if (cleanPhone.length < 9 || cleanPhone.length > 12) {
+        alert('올바른 연락처(휴대폰 번호 또는 일반 전화번호)를 입력해 주세요.\n(예: 010-1234-5678)');
+        if (phoneInput) phoneInput.focus();
+        return;
+      }
+
+      // 3. 한 명의 중복 오접수 방지 (동일 연락처 5분 쿨다운)
+      const COOLDOWN_MS = 5 * 60 * 1000; // 5분
+      let submittedMap = {};
+      try {
+        submittedMap = JSON.parse(localStorage.getItem('opencare_recent_submissions') || '{}');
+      } catch (err) {
+        submittedMap = {};
+      }
+
+      const lastTime = submittedMap[cleanPhone];
+      if (lastTime && (Date.now() - lastTime < COOLDOWN_MS)) {
+        const remainingMin = Math.ceil((COOLDOWN_MS - (Date.now() - lastTime)) / 60000);
+        alert(`[중복 접수 안내]\n\n이미 방금 동일한 연락처(${phone})로 상담 신청이 정상 접수되었습니다!\n\n전담 매니저가 확인 후 순차적으로 연락을 드리고 있으니 잠시만 기다려 주세요.\n(추가 문의사항은 약 ${remainingMin}분 뒤에 다시 신청하실 수 있습니다.)`);
+        return;
+      }
+
       const businessType = inquiryForm.querySelector('input[name="businessType"]:checked')?.value || '선택 안됨';
       const selectedServices = Array.from(inquiryForm.querySelectorAll('input[name="services"]:checked'))
         .map((cb) => cb.value);
-      const name = document.getElementById('custName')?.value.trim() || '';
-      const phone = document.getElementById('custPhone')?.value.trim() || '';
-      const memo = document.getElementById('custMemo')?.value.trim() || '없음';
 
-      const serviceListText = selectedServices.length > 0 ? selectedServices.join(', ') : '선택 없음';
+      if (selectedServices.length === 0) {
+        alert('필요한 설비 상품을 최소 1개 이상 선택해 주세요.');
+        return;
+      }
 
+      const serviceListText = selectedServices.join(', ');
+
+      isSubmitting = true;
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span>신청 접수 중입니다...</span>';
@@ -156,7 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(payload)
         });
 
-        const data = await response.json();
+        await response.json().catch(() => ({}));
+
+        // 4. 성공 시 연락처 접수 시간 기록 (5분간 재접수 방지)
+        submittedMap[cleanPhone] = Date.now();
+        try {
+          localStorage.setItem('opencare_recent_submissions', JSON.stringify(submittedMap));
+        } catch (storageErr) {}
 
         alert(`[견적 신청이 정상 접수되었습니다]\n\n성함/상호: ${name} (${phone})\n선택 품목: ${serviceListText}\n\n신청 내용이 담당자에게 실시간 전송되었습니다. 확인 후 신속하게 연락드리겠습니다!`);
         inquiryForm.reset();
@@ -164,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Submit error:', err);
         alert('전송 중 오류가 발생했습니다. 인터넷 연결을 확인해 주세요.');
       } finally {
+        isSubmitting = false;
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalBtnText;
