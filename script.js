@@ -88,23 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
       serviceVal: 'CCTV(ADT캡스)',
       themeColor: 'blue',
       intro: '국내 보안 전문 1위 브랜드 ADT캡스의 초고화질 IP 카메라와 24시간 전국 출동망으로 사장님의 소중한 매장을 365일 빈틈없이 지킵니다.',
-      images: [
-        {
-          src: 'images/adt_cctv_banner2.png',
-          title: 'ADT캡스 AI CCTV만의 특별함 (5대 핵심 기능)',
-          caption: '① AI 영상 모니터링/분석 (500만 화소 초고화질)  ② AI 이상신호 감지(금고/카운터/창고 침입/쓰러짐 감지 시 App 즉시 알림)  ③ 24시간 긴급출동 및 경찰/소방 유관기관 지원요청  ④ AI 빠른 검색 (인물 성별/옷 색상/차량 색상 검색으로 1초 검색)  ⑤ 전국 100여개 지사 신속한 A/S 및 보상 서비스'
-        },
-        {
-          src: 'images/adt_cctv_banner3.png',
-          title: 'ADT캡스 5단계 통합 보안 프로세스',
-          caption: 'AI 영상 모니터링 → 이상신호 감지 → 24시간 긴급출동 요청 → 빠른 AI 검색 → A/S 및 도난·화재 보상 서비스 지원'
-        },
-        {
-          src: 'images/adt_cctv_banner1.png',
-          title: '업종별 현장 설치 업그레이드 시나리오 5',
-          caption: '노후된 CCTV 고화질 업그레이드, 사건사고 현장 선명한 확인, 야간 무단침입 및 도난 방지, 자가설치 대비 사각지대 없는 전문 엔지니어 무료 실사 및 책임 시공, 24시간 긴급출동 연동'
-        }
-      ],
       highlights: [
         {
           icon: 'video',
@@ -142,18 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
       serviceVal: '인터넷+일반전화',
       themeColor: 'indigo',
       intro: '통신 3사(KT, SKB, LGU+) 전 통신사를 공식 취급하여 대표님 스마트폰 결합 할인과 매장 위치별 최적 회선을 비교 매칭해 드립니다. 특히 결제 끊김을 원천 차단하는 0.3초 무선 백업과 24시간 AI 통화비서(LGU+ 주력 솔루션)를 특화 지원합니다.',
-      images: [
-        {
-          src: 'images/lg_payment_backup.webp',
-          title: '[주력 추천 솔루션] 결제안심 인터넷 (피크타임 0.3초 자동 무선 백업)',
-          caption: '도로 공사나 케이블 단선 등 예기치 못한 유선 인터넷 장애 발생 시 LTE 무선망으로 0.3초 만에 즉시 자동 전환되어 피크타임 포스기, 카드단말기 결제가 1초도 멈추지 않습니다.'
-        },
-        {
-          src: 'images/lg_ai_phone.webp',
-          title: '[주력 추천 솔루션] U+ AI전화 (24시간 스마트 통화비서)',
-          caption: '바쁜 점심·저녁 피크타임과 영업 외 시간에도 AI가 전화 예약, 주차 위치, 영업시간 안내를 대신 응대하여 손님 이탈을 방지하고 통화 요약 문자를 발송합니다.'
-        }
-      ],
       highlights: [
         {
           icon: 'layers',
@@ -337,60 +308,18 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
 
-      // 공식 소개 이미지 섹션 (공식 이미지 보유 시 - 가로 폭 초과 없이 100% 최적 비율 노출)
-      if (data.images && data.images.length > 0) {
-        html += `
-          <div class="w-full max-w-full overflow-hidden">
-            <div class="flex items-center justify-between mb-4 min-w-0 gap-2">
-              <h4 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2 min-w-0 flex-1">
-                <i data-lucide="image" class="w-5 h-5 text-blue-600 flex-shrink-0"></i>
-                <span class="truncate">브랜드 공식 솔루션 소개 이미지</span>
-              </h4>
-              <span class="text-xs text-blue-600 font-semibold flex items-center gap-1 flex-shrink-0 whitespace-nowrap">
-                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
-                터치 시 확대
-              </span>
-            </div>
-            <div class="grid gap-6 w-full max-w-full">
-        `;
-
-        data.images.forEach((img) => {
-          html += `
-            <div class="bg-white border border-slate-200 rounded-2xl p-3 sm:p-5 shadow-sm space-y-3 w-full max-w-full overflow-hidden box-border">
-              <div class="flex items-start sm:items-center justify-between gap-2 border-b border-slate-100 pb-2.5 min-w-0 w-full">
-                <p class="font-extrabold text-slate-900 text-xs sm:text-base flex items-start sm:items-center gap-2 min-w-0 flex-1">
-                  <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-blue-600 inline-block flex-shrink-0 mt-1 sm:mt-0"></span>
-                  <span class="break-words line-clamp-2 sm:line-clamp-none">${img.title}</span>
-                </p>
-                <button type="button" class="btn-trigger-zoom flex-shrink-0 inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold transition border border-blue-200 cursor-pointer shadow-sm whitespace-nowrap" data-src="${img.src}" data-title="${img.title}">
-                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i>
-                  <span>크게 보기</span>
-                </button>
-              </div>
-
-              <!-- 원본 비율 그대로 시원하게 꽉 채우는 이미지 컨테이너 (가로 폭 초과 원천 차단) -->
-              <div class="overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 cursor-pointer group btn-trigger-zoom relative w-full max-w-full" data-src="${img.src}" data-title="${img.title}">
-                <img src="${img.src}" alt="${img.title}" class="w-full max-w-full h-auto block rounded-xl transition-transform duration-300 group-hover:scale-[1.008]" />
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors flex items-center justify-center">
-                  <span class="opacity-0 group-hover:opacity-100 bg-slate-900/85 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transition-opacity flex items-center gap-1.5 backdrop-blur-sm">
-                    <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
-                    원본 확대
-                  </span>
-                </div>
-              </div>
-
-              <div class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-3 sm:p-3.5 rounded-xl border border-slate-100 break-words w-full box-border">
-                ${img.caption}
-              </div>
-            </div>
-          `;
-        });
-
-        html += `
-            </div>
+      // 안내 서두
+      html += `
+        <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-3.5 sm:p-5 text-slate-800 text-xs sm:text-sm leading-relaxed flex items-start gap-2.5 sm:gap-3 w-full max-w-full box-border break-words">
+          <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <i data-lucide="info" class="w-4 h-4"></i>
           </div>
-        `;
-      }
+          <div class="min-w-0 flex-1">
+            <p class="font-bold text-slate-900 mb-1">오픈케어 제휴 공식 안내</p>
+            <p class="text-slate-600 break-words leading-relaxed">${data.intro}</p>
+          </div>
+        </div>
+      `;
 
       // 핵심 특장점 4개 그리드
       if (data.highlights && data.highlights.length > 0) {
@@ -462,24 +391,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (detailContent) {
         detailContent.innerHTML = html;
-
-        // 이미지 확대(라이트박스) 이벤트 바인딩
-        detailContent.querySelectorAll('.btn-trigger-zoom').forEach((trigger) => {
-          trigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const target = trigger.closest('[data-src]') || trigger;
-            const src = target.getAttribute('data-src');
-            const title = target.getAttribute('data-title');
-            if (src) {
-              openZoomModal(src, title);
-            }
-          });
-        });
       }
 
       // 1. 모달 표시 (display: none 해제) & 배경 스크롤 방지
       modalItemDetail.classList.remove('hidden');
       document.body.classList.add('overflow-hidden');
+
+      // 모바일 뒤로가기 시 사이트 종료 방지 히스토리 푸시
+      try {
+        history.pushState({ modalOpen: 'item-detail' }, '');
+      } catch (err) {}
 
       // 2. 모달이 렌더링된 직후 스크롤을 최상단으로 강력 리셋 (즉시, rAF 2중, 타이머 3중 보정)
       function resetScrollToTop() {
@@ -513,8 +434,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 모달 닫기 핸들러: 닫힐 때도 스크롤 위치를 0으로 선제 복구
-  function closeDetailModal() {
+  // 모달 닫기 핸들러: 닫힐 때도 스크롤 위치를 0으로 선제 복구 및 히스토리 스택 정리
+  function closeDetailModal(isFromPopState = false) {
+    if (!modalItemDetail || modalItemDetail.classList.contains('hidden')) return;
+
     if (detailContent) {
       detailContent.scrollTop = 0;
       try {
@@ -528,15 +451,22 @@ document.addEventListener('DOMContentLoaded', () => {
       modalItemDetail.classList.add('hidden');
     }
     document.body.classList.remove('overflow-hidden');
+
+    // UI 버튼 등으로 닫았을 때(뒤로가기 제스처가 아닌 경우) 푸시된 히스토리 상태 정리
+    if (!isFromPopState && history.state && history.state.modalOpen === 'item-detail') {
+      try {
+        history.back();
+      } catch (err) {}
+    }
   }
 
-  if (btnCloseDetail) btnCloseDetail.addEventListener('click', closeDetailModal);
-  if (btnCloseDetailFooter) btnCloseDetailFooter.addEventListener('click', closeDetailModal);
+  if (btnCloseDetail) btnCloseDetail.addEventListener('click', () => closeDetailModal(false));
+  if (btnCloseDetailFooter) btnCloseDetailFooter.addEventListener('click', () => closeDetailModal(false));
 
   if (modalItemDetail) {
     modalItemDetail.addEventListener('click', (e) => {
       if (e.target === modalItemDetail) {
-        closeDetailModal();
+        closeDetailModal(false);
       }
     });
   }
@@ -544,40 +474,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // ESC 키 누를 때도 모달 닫기 및 스크롤 리셋
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modalItemDetail && !modalItemDetail.classList.contains('hidden')) {
-      closeDetailModal();
+      closeDetailModal(false);
     }
   });
 
-  // ==================== 이미지 고화질 확대 뷰어 (라이트박스) 핸들러 ====================
-  const modalImageZoom = document.getElementById('modal-image-zoom');
-  const zoomImageSrc = document.getElementById('zoom-image-src');
-  const zoomImageTitle = document.getElementById('zoom-image-title');
-  const btnCloseZoom = document.getElementById('btn-close-zoom');
-
-  function openZoomModal(src, title) {
-    if (!modalImageZoom || !zoomImageSrc) return;
-    zoomImageSrc.src = src;
-    if (zoomImageTitle) zoomImageTitle.textContent = title || '공식 이미지 고화질 원본';
-    modalImageZoom.classList.remove('hidden');
-    if (window.lucide) {
-      window.lucide.createIcons();
+  // 모바일 뒤로가기 제스처 / 브라우저 뒤로가기 버튼 클릭 시 사이트가 꺼지지 않고 팝업만 닫히도록 처리
+  window.addEventListener('popstate', () => {
+    if (modalItemDetail && !modalItemDetail.classList.contains('hidden')) {
+      closeDetailModal(true);
     }
-  }
-
-  function closeZoomModal() {
-    if (modalImageZoom) {
-      modalImageZoom.classList.add('hidden');
+    if (modalTerms && !modalTerms.classList.contains('hidden')) {
+      modalTerms.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
     }
-  }
-
-  if (btnCloseZoom) btnCloseZoom.addEventListener('click', closeZoomModal);
-  if (modalImageZoom) {
-    modalImageZoom.addEventListener('click', (e) => {
-      if (e.target === modalImageZoom || e.target.id === 'zoom-img-container' || e.target === zoomImageSrc) {
-        closeZoomModal();
-      }
-    });
-  }
+    if (modalPrivacy && !modalPrivacy.classList.contains('hidden')) {
+      modalPrivacy.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+  });
 
   // "이 설비 비공개 견적 문의" 버튼 클릭 시
   if (btnApplyDetailItem) {
@@ -619,27 +533,46 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnOpenTerms && modalTerms) {
     btnOpenTerms.addEventListener('click', () => {
       modalTerms.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+      try { history.pushState({ modalOpen: 'terms' }, ''); } catch (e) {}
     });
   }
 
   if (btnOpenPrivacy && modalPrivacy) {
     btnOpenPrivacy.addEventListener('click', () => {
       modalPrivacy.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+      try { history.pushState({ modalOpen: 'privacy' }, ''); } catch (e) {}
     });
   }
 
+  function closePolicyModals() {
+    let closed = false;
+    if (modalTerms && !modalTerms.classList.contains('hidden')) {
+      modalTerms.classList.add('hidden');
+      closed = true;
+    }
+    if (modalPrivacy && !modalPrivacy.classList.contains('hidden')) {
+      modalPrivacy.classList.add('hidden');
+      closed = true;
+    }
+    if (closed) {
+      document.body.classList.remove('overflow-hidden');
+      if (history.state && (history.state.modalOpen === 'terms' || history.state.modalOpen === 'privacy')) {
+        try { history.back(); } catch (e) {}
+      }
+    }
+  }
+
   closeButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      if (modalTerms) modalTerms.classList.add('hidden');
-      if (modalPrivacy) modalPrivacy.classList.add('hidden');
-    });
+    btn.addEventListener('click', closePolicyModals);
   });
 
   [modalTerms, modalPrivacy].forEach((modal) => {
     if (modal) {
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
-          modal.classList.add('hidden');
+          closePolicyModals();
         }
       });
     }
