@@ -88,6 +88,23 @@ document.addEventListener('DOMContentLoaded', () => {
       serviceVal: 'CCTV(ADT캡스)',
       themeColor: 'blue',
       intro: '국내 보안 전문 1위 브랜드 ADT캡스의 초고화질 IP 카메라와 24시간 전국 출동망으로 사장님의 소중한 매장을 365일 빈틈없이 지킵니다.',
+      images: [
+        {
+          src: 'images/adt_cctv_banner2.png',
+          title: 'ADT캡스 AI CCTV만의 특별함 (5대 핵심 기능)',
+          caption: '① AI 영상 모니터링/분석 (500만 화소 초고화질)  ② AI 이상신호 감지(금고/카운터/창고 침입/쓰러짐 감지 시 App 즉시 알림)  ③ 24시간 긴급출동 및 경찰/소방 유관기관 지원요청  ④ AI 빠른 검색 (인물 성별/옷 색상/차량 색상 검색으로 1초 검색)  ⑤ 전국 100여개 지사 신속한 A/S 및 보상 서비스'
+        },
+        {
+          src: 'images/adt_cctv_banner3.png',
+          title: 'ADT캡스 5단계 통합 보안 프로세스',
+          caption: 'AI 영상 모니터링 → 이상신호 감지 → 24시간 긴급출동 요청 → 빠른 AI 검색 → A/S 및 도난·화재 보상 서비스 지원'
+        },
+        {
+          src: 'images/adt_cctv_banner1.png',
+          title: '업종별 현장 설치 업그레이드 시나리오 5',
+          caption: '노후된 CCTV 고화질 업그레이드, 사건사고 현장 선명한 확인, 야간 무단침입 및 도난 방지, 자가설치 대비 사각지대 없는 전문 엔지니어 무료 실사 및 책임 시공, 24시간 긴급출동 연동'
+        }
+      ],
       highlights: [
         {
           icon: 'video',
@@ -125,6 +142,18 @@ document.addEventListener('DOMContentLoaded', () => {
       serviceVal: '인터넷+일반전화',
       themeColor: 'indigo',
       intro: '통신 3사(KT, SKB, LGU+) 전 통신사를 공식 취급하여 대표님 스마트폰 결합 할인과 매장 위치별 최적 회선을 비교 매칭해 드립니다. 특히 결제 끊김을 원천 차단하는 0.3초 무선 백업과 24시간 AI 통화비서(LGU+ 주력 솔루션)를 특화 지원합니다.',
+      images: [
+        {
+          src: 'images/lg_payment_backup.webp',
+          title: '[주력 추천 솔루션] 결제안심 인터넷 (피크타임 0.3초 자동 무선 백업)',
+          caption: '도로 공사나 케이블 단선 등 예기치 못한 유선 인터넷 장애 발생 시 LTE 무선망으로 0.3초 만에 즉시 자동 전환되어 피크타임 포스기, 카드단말기 결제가 1초도 멈추지 않습니다.'
+        },
+        {
+          src: 'images/lg_ai_phone.webp',
+          title: '[주력 추천 솔루션] U+ AI전화 (24시간 스마트 통화비서)',
+          caption: '바쁜 점심·저녁 피크타임과 영업 외 시간에도 AI가 전화 예약, 주차 위치, 영업시간 안내를 대신 응대하여 손님 이탈을 방지하고 통화 요약 문자를 발송합니다.'
+        }
+      ],
       highlights: [
         {
           icon: 'layers',
@@ -308,18 +337,44 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
 
-      // 안내 서두
-      html += `
-        <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-3.5 sm:p-5 text-slate-800 text-xs sm:text-sm leading-relaxed flex items-start gap-2.5 sm:gap-3 w-full max-w-full box-border break-words">
-          <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-            <i data-lucide="info" class="w-4 h-4"></i>
+      // 브랜드 공식 솔루션 소개 이미지 (공식 이미지 보유 시 - 확대/버튼 기능 없이 선명한 원본 이미지 그대로 노출)
+      if (data.images && data.images.length > 0) {
+        html += `
+          <div class="w-full max-w-full overflow-hidden">
+            <h4 class="text-base sm:text-lg font-extrabold text-slate-900 mb-4 flex items-center gap-2">
+              <i data-lucide="image" class="w-5 h-5 text-blue-600 flex-shrink-0"></i>
+              <span>브랜드 공식 솔루션 소개 이미지</span>
+            </h4>
+            <div class="grid gap-5 w-full max-w-full">
+        `;
+
+        data.images.forEach((img) => {
+          html += `
+            <div class="bg-white border border-slate-200 rounded-2xl p-3 sm:p-5 shadow-sm space-y-3 w-full max-w-full overflow-hidden box-border">
+              <div class="border-b border-slate-100 pb-2.5 min-w-0 w-full">
+                <p class="font-extrabold text-slate-900 text-xs sm:text-base flex items-start sm:items-center gap-2 min-w-0">
+                  <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-blue-600 inline-block flex-shrink-0 mt-1 sm:mt-0"></span>
+                  <span class="break-words line-clamp-2 sm:line-clamp-none">${img.title}</span>
+                </p>
+              </div>
+
+              <div class="overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 w-full max-w-full">
+                <img src="${img.src}" alt="${img.title}" class="w-full max-w-full h-auto block rounded-xl" loading="lazy" />
+              </div>
+
+              <div class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-3 sm:p-3.5 rounded-xl border border-slate-100 break-words w-full box-border">
+                ${img.caption}
+              </div>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
           </div>
-          <div class="min-w-0 flex-1">
-            <p class="font-bold text-slate-900 mb-1">오픈케어 제휴 공식 안내</p>
-            <p class="text-slate-600 break-words leading-relaxed">${data.intro}</p>
-          </div>
-        </div>
-      `;
+        `;
+      }
+
 
       // 핵심 특장점 4개 그리드
       if (data.highlights && data.highlights.length > 0) {
