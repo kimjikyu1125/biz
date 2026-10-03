@@ -39,9 +39,17 @@
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
   <style>
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
     body {
       font-family: 'Pretendard', sans-serif;
       word-break: keep-all;
+    }
+    .break-words {
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
     .glass-nav {
       background: rgba(255, 255, 255, 0.95);
@@ -52,7 +60,7 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-100 selection:text-blue-900">
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-100 selection:text-blue-900 max-w-full overflow-x-hidden">
 
   <!-- Top Notice Banner (Clean & Easy on Eyes) -->
   <div class="bg-blue-50 border-b border-blue-100 text-blue-900 px-4 py-2 text-center text-xs sm:text-sm font-semibold flex items-center justify-center gap-2">
@@ -1049,43 +1057,43 @@
   </div>
 
   <!-- ==================== 설비 상세 스펙 & 공식 안내 팝업 모달 ==================== -->
-  <div id="modal-item-detail" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-0 sm:p-4 md:p-6 overflow-hidden">
-    <!-- Modal Card (Full screen on mobile, elegant card on sm+) -->
-    <div class="bg-white text-slate-900 border-0 sm:border sm:border-slate-200 w-full h-[100dvh] sm:h-[90vh] sm:max-h-[880px] sm:max-w-4xl sm:rounded-3xl rounded-none shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+  <div id="modal-item-detail" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-0 sm:p-4 md:p-6 overflow-x-hidden overflow-y-auto w-full max-w-full">
+    <!-- Modal Card (Strictly bound to 100% viewport width on mobile, max-w-4xl on desktop) -->
+    <div class="bg-white text-slate-900 border-0 sm:border sm:border-slate-200 w-full max-w-full sm:max-w-4xl h-[100dvh] sm:h-[90vh] sm:max-h-[880px] sm:rounded-3xl rounded-none shadow-2xl flex flex-col overflow-hidden min-w-0 box-border animate-in fade-in zoom-in-95 duration-200">
       
       <!-- Modal Header (Fixed Flex-shrink-0) -->
-      <div class="flex-shrink-0 px-4 sm:px-6 py-3.5 sm:py-4 border-b border-slate-200 bg-white flex items-center justify-between z-20">
-        <div class="flex items-center gap-2.5 min-w-0 pr-2">
-          <span id="detail-brand-badge" class="flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 border border-blue-200">
+      <div class="flex-shrink-0 px-4 sm:px-6 py-3.5 sm:py-4 border-b border-slate-200 bg-white flex items-center justify-between z-20 min-w-0 w-full max-w-full box-border">
+        <div class="flex items-center gap-2 min-w-0 flex-1 pr-2 overflow-hidden">
+          <span id="detail-brand-badge" class="flex-shrink-0 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[11px] sm:text-xs font-bold bg-blue-100 text-blue-700 border border-blue-200 max-w-[140px] sm:max-w-none truncate">
             브랜드 공식 안내
           </span>
-          <h3 id="detail-title" class="text-base sm:text-lg md:text-xl font-extrabold text-slate-900 truncate">
+          <h3 id="detail-title" class="text-sm sm:text-lg md:text-xl font-extrabold text-slate-900 truncate min-w-0 flex-1">
             설비 상세 안내
           </h3>
         </div>
-        <button type="button" id="btn-close-detail" class="flex-shrink-0 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 flex items-center justify-center transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
+        <button type="button" id="btn-close-detail" class="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 flex items-center justify-center transition">
+          <i data-lucide="x" class="w-4 h-4 sm:w-5 sm:h-5"></i>
         </button>
       </div>
 
-      <!-- Modal Body (Flex-1 min-h-0: Perfect Independent Scrolling!) -->
-      <div id="detail-content" class="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 text-slate-700 text-sm leading-relaxed overscroll-contain">
+      <!-- Modal Body (Flex-1 min-h-0: Perfect Independent Scrolling & Zero Horizontal Overflow) -->
+      <div id="detail-content" class="flex-1 min-h-0 w-full max-w-full overflow-y-auto overflow-x-hidden p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 text-slate-700 text-sm leading-relaxed overscroll-contain box-border break-words">
         <!-- Content will be injected dynamically via script.js -->
       </div>
 
       <!-- Modal Footer (Fixed Flex-shrink-0, Never cut off on mobile) -->
-      <div class="flex-shrink-0 border-t border-slate-200 bg-slate-50 p-3 sm:p-4 md:p-5 flex flex-col sm:flex-row items-center justify-between gap-3 z-20 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-        <div class="text-xs text-slate-500 hidden sm:flex items-center gap-1.5">
+      <div class="flex-shrink-0 border-t border-slate-200 bg-slate-50 p-3 sm:p-4 md:p-5 flex flex-col sm:flex-row items-center justify-between gap-3 z-20 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] pb-[max(0.75rem,env(safe-area-inset-bottom))] w-full max-w-full box-border">
+        <div class="text-xs text-slate-500 hidden sm:flex items-center gap-1.5 min-w-0">
           <i data-lucide="shield-check" class="w-4 h-4 text-blue-600 flex-shrink-0"></i>
-          <span>오픈케어 제휴 전용 비공개 혜택가 적용 가능</span>
+          <span class="truncate">오픈케어 제휴 전용 비공개 혜택가 적용 가능</span>
         </div>
-        <div class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-end">
-          <button type="button" id="btn-close-detail-footer" class="px-4 sm:px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-bold text-sm transition flex-shrink-0">
+        <div class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-end min-w-0">
+          <button type="button" id="btn-close-detail-footer" class="px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs sm:text-sm transition flex-shrink-0 whitespace-nowrap">
             닫기
           </button>
-          <button type="button" id="btn-apply-detail-item" class="flex-1 sm:flex-initial px-5 sm:px-7 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-extrabold text-sm sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2">
-            <span>이 설비 비공개 견적 문의</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <button type="button" id="btn-apply-detail-item" class="flex-1 sm:flex-initial px-4 sm:px-7 py-2.5 sm:py-3 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-extrabold text-xs sm:text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-1.5 sm:gap-2 min-w-0">
+            <span class="truncate">이 설비 비공개 견적 문의</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 flex-shrink-0"></i>
           </button>
         </div>
       </div>
@@ -1094,13 +1102,13 @@
   </div>
 
   <!-- ==================== 이미지 원본 고화질 확대 뷰어 (라이트박스) ==================== -->
-  <div id="modal-image-zoom" class="fixed inset-0 z-[60] hidden bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-2 sm:p-4">
-    <div class="w-full max-w-4xl flex items-center justify-between text-white pb-3 px-2 flex-shrink-0">
-      <div class="flex items-center gap-2">
-        <i data-lucide="zoom-in" class="w-5 h-5 text-blue-400"></i>
-        <span id="zoom-image-title" class="font-bold text-sm sm:text-base truncate">공식 이미지 고화질 원본</span>
+  <div id="modal-image-zoom" class="fixed inset-0 z-[60] hidden bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-2 sm:p-4 w-full max-w-full overflow-hidden">
+    <div class="w-full max-w-4xl flex items-center justify-between text-white pb-3 px-2 flex-shrink-0 min-w-0">
+      <div class="flex items-center gap-2 min-w-0 flex-1 pr-2">
+        <i data-lucide="zoom-in" class="w-5 h-5 text-blue-400 flex-shrink-0"></i>
+        <span id="zoom-image-title" class="font-bold text-sm sm:text-base truncate flex-1 min-w-0">공식 이미지 고화질 원본</span>
       </div>
-      <button type="button" id="btn-close-zoom" class="px-3.5 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white text-sm font-bold flex items-center gap-1.5 transition">
+      <button type="button" id="btn-close-zoom" class="px-3 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition flex-shrink-0 whitespace-nowrap">
         <i data-lucide="x" class="w-4 h-4"></i>
         <span>닫기</span>
       </button>
@@ -1108,9 +1116,9 @@
     <div class="flex-1 min-h-0 w-full max-w-4xl overflow-auto flex items-center justify-center p-1" id="zoom-img-container">
       <img id="zoom-image-src" src="" alt="확대 이미지" class="max-w-full max-h-[82vh] object-contain rounded-xl shadow-2xl transition-transform" />
     </div>
-    <p class="text-xs text-slate-400 pt-2 flex-shrink-0">이미지를 누르거나 닫기 버튼을 누르면 팝업으로 돌아갑니다.</p>
+    <p class="text-xs text-slate-400 pt-2 flex-shrink-0 text-center">이미지를 누르거나 닫기 버튼을 누르면 팝업으로 돌아갑니다.</p>
   </div>
 
-  <script src="script.js?v=14"></script>
+  <script src="script.js?v=15"></script>
 </body>
 </html>

@@ -326,60 +326,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 안내 서두
       html += `
-        <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-4 sm:p-5 text-slate-800 text-sm leading-relaxed flex items-start gap-3">
-          <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+        <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-3.5 sm:p-5 text-slate-800 text-xs sm:text-sm leading-relaxed flex items-start gap-2.5 sm:gap-3 w-full max-w-full box-border break-words">
+          <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
             <i data-lucide="info" class="w-4 h-4"></i>
           </div>
-          <div>
+          <div class="min-w-0 flex-1">
             <p class="font-bold text-slate-900 mb-1">오픈케어 제휴 공식 안내</p>
-            <p class="text-slate-600">${data.intro}</p>
+            <p class="text-slate-600 break-words leading-relaxed">${data.intro}</p>
           </div>
         </div>
       `;
 
-      // 공식 소개 이미지 섹션 (공식 이미지 보유 시 - 압축 제한 없이 100% 폭으로 시원하게 노출)
+      // 공식 소개 이미지 섹션 (공식 이미지 보유 시 - 가로 폭 초과 없이 100% 최적 비율 노출)
       if (data.images && data.images.length > 0) {
         html += `
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <h4 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                <i data-lucide="image" class="w-5 h-5 text-blue-600"></i>
-                <span>브랜드 공식 솔루션 소개 이미지</span>
+          <div class="w-full max-w-full overflow-hidden">
+            <div class="flex items-center justify-between mb-4 min-w-0 gap-2">
+              <h4 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2 min-w-0 flex-1">
+                <i data-lucide="image" class="w-5 h-5 text-blue-600 flex-shrink-0"></i>
+                <span class="truncate">브랜드 공식 솔루션 소개 이미지</span>
               </h4>
-              <span class="text-xs text-blue-600 font-semibold flex items-center gap-1">
+              <span class="text-xs text-blue-600 font-semibold flex items-center gap-1 flex-shrink-0 whitespace-nowrap">
                 <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
-                사진 터치 시 고화질 확대
+                터치 시 확대
               </span>
             </div>
-            <div class="grid gap-6">
+            <div class="grid gap-6 w-full max-w-full">
         `;
 
         data.images.forEach((img) => {
           html += `
-            <div class="bg-white border border-slate-200 rounded-2xl p-3.5 sm:p-5 shadow-sm space-y-3">
-              <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
-                <p class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block flex-shrink-0"></span>
-                  <span>${img.title}</span>
+            <div class="bg-white border border-slate-200 rounded-2xl p-3 sm:p-5 shadow-sm space-y-3 w-full max-w-full overflow-hidden box-border">
+              <div class="flex items-start sm:items-center justify-between gap-2 border-b border-slate-100 pb-2.5 min-w-0 w-full">
+                <p class="font-extrabold text-slate-900 text-xs sm:text-base flex items-start sm:items-center gap-2 min-w-0 flex-1">
+                  <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-blue-600 inline-block flex-shrink-0 mt-1 sm:mt-0"></span>
+                  <span class="break-words line-clamp-2 sm:line-clamp-none">${img.title}</span>
                 </p>
-                <button type="button" class="btn-trigger-zoom flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold transition border border-blue-200 cursor-pointer shadow-sm" data-src="${img.src}" data-title="${img.title}">
+                <button type="button" class="btn-trigger-zoom flex-shrink-0 inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold transition border border-blue-200 cursor-pointer shadow-sm whitespace-nowrap" data-src="${img.src}" data-title="${img.title}">
                   <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i>
                   <span>크게 보기</span>
                 </button>
               </div>
 
-              <!-- 원본 비율 그대로 시원하게 꽉 채우는 이미지 컨테이너 (세로/가로 찌그러짐 원천 차단) -->
-              <div class="overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 cursor-pointer group btn-trigger-zoom relative" data-src="${img.src}" data-title="${img.title}">
-                <img src="${img.src}" alt="${img.title}" class="w-full h-auto block rounded-xl transition-transform duration-300 group-hover:scale-[1.008]" />
+              <!-- 원본 비율 그대로 시원하게 꽉 채우는 이미지 컨테이너 (가로 폭 초과 원천 차단) -->
+              <div class="overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 cursor-pointer group btn-trigger-zoom relative w-full max-w-full" data-src="${img.src}" data-title="${img.title}">
+                <img src="${img.src}" alt="${img.title}" class="w-full max-w-full h-auto block rounded-xl transition-transform duration-300 group-hover:scale-[1.008]" />
                 <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors flex items-center justify-center">
-                  <span class="opacity-0 group-hover:opacity-100 bg-slate-900/85 text-white text-xs font-bold px-3.5 py-2 rounded-full shadow-lg transition-opacity flex items-center gap-1.5 backdrop-blur-sm">
+                  <span class="opacity-0 group-hover:opacity-100 bg-slate-900/85 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg transition-opacity flex items-center gap-1.5 backdrop-blur-sm">
                     <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
-                    클릭 시 고화질 원본 확대
+                    원본 확대
                   </span>
                 </div>
               </div>
 
-              <div class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+              <div class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-3 sm:p-3.5 rounded-xl border border-slate-100 break-words w-full box-border">
                 ${img.caption}
               </div>
             </div>
@@ -395,22 +395,22 @@ document.addEventListener('DOMContentLoaded', () => {
       // 핵심 특장점 4개 그리드
       if (data.highlights && data.highlights.length > 0) {
         html += `
-          <div>
+          <div class="w-full max-w-full">
             <h4 class="text-base sm:text-lg font-extrabold text-slate-900 mb-4 flex items-center gap-2">
-              <i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i>
+              <i data-lucide="check-circle" class="w-5 h-5 text-blue-600 flex-shrink-0"></i>
               <span>핵심 특장점 및 사장님 혜택</span>
             </h4>
-            <div class="grid sm:grid-cols-2 gap-4">
+            <div class="grid sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-full">
         `;
 
         data.highlights.forEach((h) => {
           html += `
-            <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-blue-400 hover:bg-white hover:shadow-md transition">
-              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-3">
+            <div class="p-3.5 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-blue-400 hover:bg-white hover:shadow-md transition w-full box-border">
+              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-3 flex-shrink-0">
                 <i data-lucide="${h.icon}" class="w-5 h-5"></i>
               </div>
-              <h5 class="font-bold text-slate-900 text-sm mb-1.5">${h.title}</h5>
-              <p class="text-xs text-slate-600 leading-relaxed">${h.desc}</p>
+              <h5 class="font-bold text-slate-900 text-sm mb-1.5 break-words">${h.title}</h5>
+              <p class="text-xs text-slate-600 leading-relaxed break-words">${h.desc}</p>
             </div>
           `;
         });
@@ -421,16 +421,16 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
       }
 
-      // 상세 스펙 테이블
+      // 상세 스펙 테이블 (table-fixed 및 w-full 적용으로 모바일 가로 초과 원천 차단)
       if (data.specs && data.specs.length > 0) {
         html += `
-          <div>
+          <div class="w-full max-w-full overflow-hidden">
             <h4 class="text-base sm:text-lg font-extrabold text-slate-900 mb-4 flex items-center gap-2">
-              <i data-lucide="list" class="w-5 h-5 text-blue-600"></i>
+              <i data-lucide="list" class="w-5 h-5 text-blue-600 flex-shrink-0"></i>
               <span>공식 상세 사양 및 지원 내용</span>
             </h4>
-            <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-              <table class="w-full text-xs sm:text-sm text-left border-collapse">
+            <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm w-full max-w-full box-border">
+              <table class="w-full table-fixed text-xs sm:text-sm text-left border-collapse">
                 <tbody>
         `;
 
@@ -438,8 +438,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const bgClass = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/70';
           html += `
             <tr class="${bgClass} border-b border-slate-200/70 last:border-b-0">
-              <th class="py-3 px-4 font-bold text-slate-900 w-1/3 sm:w-1/4 bg-slate-100/60 border-r border-slate-200/70">${s.label}</th>
-              <td class="py-3 px-4 text-slate-700 leading-relaxed">${s.val}</td>
+              <th class="py-2.5 sm:py-3 px-3 sm:px-4 font-bold text-slate-900 w-[96px] sm:w-1/4 bg-slate-100/60 border-r border-slate-200/70 align-top break-keep">${s.label}</th>
+              <td class="py-2.5 sm:py-3 px-3 sm:px-4 text-slate-700 leading-relaxed break-words">${s.val}</td>
             </tr>
           `;
         });
@@ -454,11 +454,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 오픈케어 비공개 상담 안내 알림 (외부 번호나 카카오톡 링크 없이 내부 신청 안내)
       html += `
-        <div class="bg-slate-100 rounded-2xl p-4 text-xs text-slate-600 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-2">
-            <i data-lucide="shield-alert" class="w-4 h-4 text-slate-500 flex-shrink-0"></i>
-            <span>본 설비는 사업장 환경(평수, 회선, 테이블 대수)에 따라 최적 요율이 산출되므로 아래 견적 문의를 통해 1:1 맞춤 견적서를 받아보실 수 있습니다.</span>
-          </div>
+        <div class="bg-slate-100 rounded-2xl p-3.5 sm:p-4 text-xs text-slate-600 flex items-start sm:items-center gap-2.5 sm:gap-3 w-full max-w-full box-border">
+          <i data-lucide="shield-alert" class="w-4 h-4 text-slate-500 flex-shrink-0 mt-0.5 sm:mt-0"></i>
+          <span class="break-words flex-1 min-w-0">본 설비는 사업장 환경(평수, 회선, 테이블 대수)에 따라 최적 요율이 산출되므로 아래 견적 문의를 통해 1:1 맞춤 견적서를 받아보실 수 있습니다.</span>
         </div>
       `;
 
