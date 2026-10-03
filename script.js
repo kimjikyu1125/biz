@@ -464,7 +464,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (detailContent) {
         detailContent.innerHTML = html;
-        detailContent.scrollTop = 0; // 스크롤 맨 위로 초기화
 
         // 이미지 확대(라이트박스) 이벤트 바인딩
         detailContent.querySelectorAll('.btn-trigger-zoom').forEach((trigger) => {
@@ -480,21 +479,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // 모달 표시 & Lucide 아이콘 렌더링
+      // 1. 모달 표시 (display: none 해제) & 배경 스크롤 방지
       modalItemDetail.classList.remove('hidden');
-      document.body.classList.add('overflow-hidden'); // 배경 스크롤 방지
+      document.body.classList.add('overflow-hidden');
+
+      // 2. 모달이 렌더링된 직후 스크롤을 최상단으로 강력 리셋 (즉시, rAF 2중, 타이머 3중 보정)
+      function resetScrollToTop() {
+        if (detailContent) {
+          detailContent.scrollTop = 0;
+          try {
+            detailContent.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          } catch (e) {
+            detailContent.scrollTop = 0;
+          }
+        }
+        if (modalItemDetail) {
+          modalItemDetail.scrollTop = 0;
+          const innerCard = modalItemDetail.firstElementChild;
+          if (innerCard) innerCard.scrollTop = 0;
+        }
+      }
+
+      resetScrollToTop();
+      requestAnimationFrame(() => {
+        resetScrollToTop();
+        requestAnimationFrame(resetScrollToTop);
+      });
+      setTimeout(resetScrollToTop, 20);
+      setTimeout(resetScrollToTop, 60);
+      setTimeout(resetScrollToTop, 150);
+
       if (window.lucide) {
         window.lucide.createIcons();
       }
     });
   });
 
-  // 모달 닫기 핸들러
+  // 모달 닫기 핸들러: 닫힐 때도 스크롤 위치를 0으로 선제 복구
   function closeDetailModal() {
-    if (modalItemDetail) {
-      modalItemDetail.classList.add('hidden');
-      document.body.classList.remove('overflow-hidden');
+    if (detailContent) {
+      detailContent.scrollTop = 0;
+      try {
+        detailContent.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      } catch (e) {}
     }
+    if (modalItemDetail) {
+      modalItemDetail.scrollTop = 0;
+      const innerCard = modalItemDetail.firstElementChild;
+      if (innerCard) innerCard.scrollTop = 0;
+      modalItemDetail.classList.add('hidden');
+    }
+    document.body.classList.remove('overflow-hidden');
   }
 
   if (btnCloseDetail) btnCloseDetail.addEventListener('click', closeDetailModal);
@@ -507,6 +542,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // ESC 키 누를 때도 모달 닫기 및 스크롤 리셋
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalItemDetail && !modalItemDetail.classList.contains('hidden')) {
+      closeDetailModal();
+    }
+  });
 
   // ==================== 이미지 고화질 확대 뷰어 (라이트박스) 핸들러 ====================
   const modalImageZoom = document.getElementById('modal-image-zoom');
