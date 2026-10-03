@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     internet: {
       brandBadge: 'LG U+ 우리가게패키지 공식 파트너',
-      title: '인터넷 + 일반전화 (LG U+) - 결제안심 & 24시간 AI 통화비서',
+      title: '인터넷 + 일반전화 - 결제안심 & 24시간 AI 통화비서',
       serviceVal: '인터넷+일반전화',
       themeColor: 'indigo',
       intro: '피크타임 결제 끊김 0%에 도전하는 결제안심 무선 백업 인터넷과 바쁜 홀 서빙 중에도 24시간 손님을 놓치지 않는 AI 통화비서 일반전화입니다.',
@@ -187,8 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     pos: {
       brandBadge: '국내 시장점유율 1위 OK포스 공식 솔루션',
-      title: '포스기 (OK포스) - 배달 연동 & 실시간 모바일 매출 관리',
-      serviceVal: '포스기(POS)',
+      title: '포스기 - 배달 연동 & 실시간 모바일 매출 관리',
+      serviceVal: '포스기',
       themeColor: 'emerald',
       intro: '국내 25만 개 이상의 가맹점이 선택한 압도적 1위 OKPOS! 배달 3사 주문 1초 접수부터 전 카드사 등록비 면제까지 완벽 지원합니다.',
       images: [],
