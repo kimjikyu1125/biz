@@ -90,14 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
       intro: '국내 보안 전문 1위 브랜드 ADT캡스의 초고화질 IP 카메라와 24시간 전국 출동망으로 사장님의 소중한 매장을 365일 빈틈없이 지킵니다.',
       images: [
         {
-          src: 'images/adt_cctv_banner1.png',
-          title: 'ADT캡스 5대 핵심 업그레이드 솔루션',
-          caption: '500만 화소 초고화질, AI 빠른 검색, 24시간 긴급출동, 자가설치 대비 올인원 통합 관제'
+          src: 'images/adt_cctv_banner2.png',
+          title: 'ADT캡스 AI CCTV만의 특별함 (5대 핵심 기능)',
+          caption: '① AI 영상 모니터링/분석 (500만 화소 초고화질)  ② AI 이상신호 감지(금고/카운터/창고 침입/쓰러짐 감지 시 App 즉시 알림)  ③ 24시간 긴급출동 및 경찰/소방 유관기관 지원요청  ④ AI 빠른 검색 (인물 성별/옷 색상/차량 색상 검색으로 1초 검색)  ⑤ 전국 100여개 지사 신속한 A/S 및 보상 서비스'
         },
         {
-          src: 'images/adt_cctv_banner2.png',
-          title: '스마트 AI 영상 모니터링 & 출동 서비스',
-          caption: 'AI 영상 모니터링/분석, AI 이상신호 감지, 침입 시 긴급출동, 공식 A/S 및 보상 서비스 지원'
+          src: 'images/adt_cctv_banner3.png',
+          title: 'ADT캡스 5단계 통합 보안 프로세스',
+          caption: 'AI 영상 모니터링 → 이상신호 감지 → 24시간 긴급출동 요청 → 빠른 AI 검색 → A/S 및 도난·화재 보상 서비스 지원'
+        },
+        {
+          src: 'images/adt_cctv_banner1.png',
+          title: '업종별 현장 설치 업그레이드 시나리오 5',
+          caption: '노후된 CCTV 고화질 업그레이드, 사건사고 현장 선명한 확인, 야간 무단침입 및 도난 방지, 자가설치 대비 사각지대 없는 전문 엔지니어 무료 실사 및 책임 시공, 24시간 긴급출동 연동'
         }
       ],
       highlights: [
@@ -140,13 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
       images: [
         {
           src: 'images/lg_payment_backup.webp',
-          title: '결제안심 인터넷 (0.3초 자동 무선 백업)',
-          caption: '유선 인터넷 장애 발생 시 0.3초 만에 LTE 무선망으로 자동 백업 전환되어 피크타임 카드결제와 배달 접수 무중단 보장'
+          title: '결제안심 인터넷 (피크타임 0.3초 자동 무선 백업)',
+          caption: '도로 공사나 케이블 단선 등 예기치 못한 유선 인터넷 장애 발생 시 LTE 무선망으로 0.3초 만에 즉시 자동 전환되어 피크타임 포스기, 카드단말기 결제가 1초도 멈추지 않습니다.'
         },
         {
           src: 'images/lg_ai_phone.webp',
           title: 'U+ AI전화 (24시간 스마트 통화비서)',
-          caption: '바쁜 피크타임과 영업 외 시간에도 AI가 전화 예약, 주차 위치, 영업시간 안내를 대신 응대하여 손님 이탈 방지'
+          caption: '바쁜 점심·저녁 피크타임과 영업 외 시간에도 AI가 전화 예약, 주차 위치, 영업시간 안내를 대신 응대하여 손님 이탈을 방지하고 통화 요약 문자를 발송합니다.'
         }
       ],
       highlights: [
@@ -321,8 +326,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // 안내 서두
       html += `
-        <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-5 text-slate-800 text-sm leading-relaxed flex items-start gap-3">
-          <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+        <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-4 sm:p-5 text-slate-800 text-sm leading-relaxed flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
             <i data-lucide="info" class="w-4 h-4"></i>
           </div>
           <div>
@@ -332,32 +337,50 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
 
-      // 공식 소개 이미지 섹션 (공식 이미지 보유 시)
+      // 공식 소개 이미지 섹션 (공식 이미지 보유 시 - 압축 제한 없이 100% 폭으로 시원하게 노출)
       if (data.images && data.images.length > 0) {
         html += `
           <div>
             <div class="flex items-center justify-between mb-4">
-              <h4 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+              <h4 class="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
                 <i data-lucide="image" class="w-5 h-5 text-blue-600"></i>
                 <span>브랜드 공식 솔루션 소개 이미지</span>
               </h4>
-              <span class="text-xs text-slate-500 font-medium">*공식 사이트 정품 인증 자료</span>
+              <span class="text-xs text-blue-600 font-semibold flex items-center gap-1">
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                사진 터치 시 고화질 확대
+              </span>
             </div>
             <div class="grid gap-6">
         `;
 
         data.images.forEach((img) => {
           html += `
-            <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-3 sm:p-4 shadow-sm">
-              <div class="overflow-hidden rounded-xl bg-white border border-slate-100">
-                <img src="${img.src}" alt="${img.title}" loading="lazy" class="w-full object-contain max-h-[380px] mx-auto hover:scale-[1.01] transition-transform duration-300" />
-              </div>
-              <div class="mt-3 px-2">
-                <p class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-blue-600 inline-block"></span>
-                  ${img.title}
+            <div class="bg-white border border-slate-200 rounded-2xl p-3.5 sm:p-5 shadow-sm space-y-3">
+              <div class="flex items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
+                <p class="font-extrabold text-slate-900 text-sm sm:text-base flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block flex-shrink-0"></span>
+                  <span>${img.title}</span>
                 </p>
-                <p class="text-xs text-slate-600 mt-1 leading-relaxed">${img.caption}</p>
+                <button type="button" class="btn-trigger-zoom flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold transition border border-blue-200 cursor-pointer shadow-sm" data-src="${img.src}" data-title="${img.title}">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i>
+                  <span>크게 보기</span>
+                </button>
+              </div>
+
+              <!-- 원본 비율 그대로 시원하게 꽉 채우는 이미지 컨테이너 (세로/가로 찌그러짐 원천 차단) -->
+              <div class="overflow-hidden rounded-xl bg-slate-50 border border-slate-200/80 cursor-pointer group btn-trigger-zoom relative" data-src="${img.src}" data-title="${img.title}">
+                <img src="${img.src}" alt="${img.title}" class="w-full h-auto block rounded-xl transition-transform duration-300 group-hover:scale-[1.008]" />
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors flex items-center justify-center">
+                  <span class="opacity-0 group-hover:opacity-100 bg-slate-900/85 text-white text-xs font-bold px-3.5 py-2 rounded-full shadow-lg transition-opacity flex items-center gap-1.5 backdrop-blur-sm">
+                    <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                    클릭 시 고화질 원본 확대
+                  </span>
+                </div>
+              </div>
+
+              <div class="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                ${img.caption}
               </div>
             </div>
           `;
@@ -373,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.highlights && data.highlights.length > 0) {
         html += `
           <div>
-            <h4 class="text-base font-extrabold text-slate-900 mb-4 flex items-center gap-2">
+            <h4 class="text-base sm:text-lg font-extrabold text-slate-900 mb-4 flex items-center gap-2">
               <i data-lucide="check-circle" class="w-5 h-5 text-blue-600"></i>
               <span>핵심 특장점 및 사장님 혜택</span>
             </h4>
@@ -382,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         data.highlights.forEach((h) => {
           html += `
-            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-blue-400 hover:bg-white hover:shadow-md transition">
+            <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-blue-400 hover:bg-white hover:shadow-md transition">
               <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-3">
                 <i data-lucide="${h.icon}" class="w-5 h-5"></i>
               </div>
@@ -402,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.specs && data.specs.length > 0) {
         html += `
           <div>
-            <h4 class="text-base font-extrabold text-slate-900 mb-4 flex items-center gap-2">
+            <h4 class="text-base sm:text-lg font-extrabold text-slate-900 mb-4 flex items-center gap-2">
               <i data-lucide="list" class="w-5 h-5 text-blue-600"></i>
               <span>공식 상세 사양 및 지원 내용</span>
             </h4>
@@ -441,10 +464,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (detailContent) {
         detailContent.innerHTML = html;
+        detailContent.scrollTop = 0; // 스크롤 맨 위로 초기화
+
+        // 이미지 확대(라이트박스) 이벤트 바인딩
+        detailContent.querySelectorAll('.btn-trigger-zoom').forEach((trigger) => {
+          trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const target = trigger.closest('[data-src]') || trigger;
+            const src = target.getAttribute('data-src');
+            const title = target.getAttribute('data-title');
+            if (src) {
+              openZoomModal(src, title);
+            }
+          });
+        });
       }
 
       // 모달 표시 & Lucide 아이콘 렌더링
       modalItemDetail.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden'); // 배경 스크롤 방지
       if (window.lucide) {
         window.lucide.createIcons();
       }
@@ -455,6 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeDetailModal() {
     if (modalItemDetail) {
       modalItemDetail.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
     }
   }
 
@@ -465,6 +504,37 @@ document.addEventListener('DOMContentLoaded', () => {
     modalItemDetail.addEventListener('click', (e) => {
       if (e.target === modalItemDetail) {
         closeDetailModal();
+      }
+    });
+  }
+
+  // ==================== 이미지 고화질 확대 뷰어 (라이트박스) 핸들러 ====================
+  const modalImageZoom = document.getElementById('modal-image-zoom');
+  const zoomImageSrc = document.getElementById('zoom-image-src');
+  const zoomImageTitle = document.getElementById('zoom-image-title');
+  const btnCloseZoom = document.getElementById('btn-close-zoom');
+
+  function openZoomModal(src, title) {
+    if (!modalImageZoom || !zoomImageSrc) return;
+    zoomImageSrc.src = src;
+    if (zoomImageTitle) zoomImageTitle.textContent = title || '공식 이미지 고화질 원본';
+    modalImageZoom.classList.remove('hidden');
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  }
+
+  function closeZoomModal() {
+    if (modalImageZoom) {
+      modalImageZoom.classList.add('hidden');
+    }
+  }
+
+  if (btnCloseZoom) btnCloseZoom.addEventListener('click', closeZoomModal);
+  if (modalImageZoom) {
+    modalImageZoom.addEventListener('click', (e) => {
+      if (e.target === modalImageZoom || e.target.id === 'zoom-img-container' || e.target === zoomImageSrc) {
+        closeZoomModal();
       }
     });
   }
