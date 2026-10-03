@@ -337,14 +337,10 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
 
-      // 브랜드 공식 솔루션 소개 이미지 (공식 이미지 보유 시 - 확대/버튼 기능 없이 선명한 원본 이미지 그대로 노출)
+      // 공식 소개 이미지 (헤더 텍스트 없이 이미지 카드만 바로 깔끔하게 노출)
       if (data.images && data.images.length > 0) {
         html += `
           <div class="w-full max-w-full overflow-hidden">
-            <h4 class="text-base sm:text-lg font-extrabold text-slate-900 mb-4 flex items-center gap-2">
-              <i data-lucide="image" class="w-5 h-5 text-blue-600 flex-shrink-0"></i>
-              <span>브랜드 공식 솔루션 소개 이미지</span>
-            </h4>
             <div class="grid gap-5 w-full max-w-full">
         `;
 
