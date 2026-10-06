@@ -1,5 +1,17 @@
+// Force only light mode & protect against mobile dark mode color inversion
+try {
+  document.documentElement.style.setProperty('color-scheme', 'only light', 'important');
+} catch (e) {}
+
 // Initialize Lucide icons
 document.addEventListener('DOMContentLoaded', () => {
+  try {
+    document.documentElement.style.setProperty('color-scheme', 'only light', 'important');
+    if (document.body) {
+      document.body.style.setProperty('color-scheme', 'only light', 'important');
+    }
+  } catch (e) {}
+
   if (window.lucide) {
     window.lucide.createIcons();
   }

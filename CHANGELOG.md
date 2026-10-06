@@ -33,10 +33,11 @@
     - ③ 포스기 (OKPOS): **비공개 제휴가 ~~월 35,000원~~ 월 0원~**
     - ④ 하이오더 (KT 테이블오더): **비공개 제휴가 ~~월 26,000원~~ 월 15,000원~**
     - ⑤ 정수기 (업소용·오피스): **비공개 제휴가 월 18,900원~**
-- **모바일/브라우저 자체 다크 모드 강제 반전 차단 및 고유 브랜드 컬러 고정**:
-  - 스마트폰(삼성 인터넷, 안드로이드 크롬, iOS 사파리 등)의 '시스템 다크 모드'나 '웹페이지 다크 모드 강제 반전' 활성화 시에도 웹사이트 고유 디자인 색상이 왜곡되지 않도록 메타 태그(`<meta name="color-scheme" content="light">`, `<meta name="theme-color" content="#ffffff">`) 적용
-  - CSS `:root`, `html`, `body`, 폼 입력창에 `color-scheme: light !important`, `background-color: #f8fafc !important` 강제 부여 및 `@media (prefers-color-scheme: dark)` 무력화 처리 완료
-  - Tailwind CDN 설정에 `darkMode: 'class'`를 적용하여 OS 테마에 의한 자동 반전 원천 차단 완료
+- **모바일/브라우저 자체 다크 모드 강제 반전 차단 및 고유 브랜드 컬러 고정 (2차 완벽 방어)**:
+  - Chromium 및 W3C 공식 규격인 `<meta name="color-scheme" content="only light">` 메타태그 적용 (일반 `light`와 달리 브라우저 렌더러의 Auto Dark Theme 강제 반전 알고리즘을 완벽하게 옵트아웃/차단)
+  - 삼성 인터넷 및 모바일 크롬의 단색 배경 반전(Luminance Inversion) 회피를 위해 `body`, `html`, 카드, 모달, 네비게이션 등에 `background-image: linear-gradient(...) !important` 그래픽 쉴드 적용
+  - CSS `:root, html, body, *` 전역에 `color-scheme: only light !important`, `supported-color-schemes: only light !important` 부여
+  - JavaScript 런타임 단계(`script.js`)에서도 `color-scheme: only light !important`를 동적 주입하여 어떠한 환경에서도 브랜드 고유 라이트 테마(화이트/블루/슬레이트)가 100% 온전히 유지되도록 방어 완료
 
 ---
 

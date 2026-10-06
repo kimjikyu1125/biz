@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>오픈케어 - 소상공인 5대 설비 제휴 비공개 혜택몰</title>
   
-  <!-- 모바일 기기 자체 테마(다크 모드 강제 반전) 무시 및 개발 고유 컬러 고정 -->
-  <meta name="color-scheme" content="light" />
-  <meta name="supported-color-schemes" content="light" />
+  <!-- 모바일 기기 자체 테마(다크 모드 강제 반전 / Chromium Force Dark) 원천 차단 및 개발 고유 라이트 컬러 고정 -->
+  <meta name="color-scheme" content="only light" />
+  <meta name="supported-color-schemes" content="only light" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   
   <!-- Pretendard Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -45,42 +46,119 @@
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
   <style>
+    /* 1. W3C & Chromium 공식 Force Dark(Auto Dark Theme) 옵트아웃 규격 */
     :root {
-      color-scheme: light !important;
-      supported-color-schemes: light !important;
+      color-scheme: only light !important;
+      supported-color-schemes: only light !important;
     }
+    *, *::before, *::after {
+      color-scheme: only light !important;
+      box-sizing: border-box;
+    }
+
+    /* 2. 모바일 브라우저(삼성 인터넷, 안드로이드 크롬 등)의 배경색 반전 알고리즘 방어:
+       단색 background-color는 브라우저 엔진이 반전시키지만, linear-gradient 이미지는 그래픽으로 인식하여 반전을 건너뜁니다. */
     html, body {
       max-width: 100%;
       overflow-x: hidden;
-      color-scheme: light !important;
+      color-scheme: only light !important;
       background-color: #f8fafc !important;
+      background-image: linear-gradient(0deg, #f8fafc, #f8fafc) !important;
       color: #0f172a !important;
-    }
-    /* 모바일 브라우저(삼성 인터넷, 크롬, 사파리 등)의 다크모드 강제 색상 반전 무력화 */
-    @media (prefers-color-scheme: dark) {
-      :root, html, body {
-        color-scheme: light !important;
-        background-color: #f8fafc !important;
-        color: #0f172a !important;
-      }
-    }
-    input, textarea, select, button {
-      color-scheme: light !important;
-    }
-    body {
       font-family: 'Pretendard', sans-serif;
       word-break: keep-all;
     }
+
+    /* 3. 흰색 및 주요 컨테이너 배경 반전 쉴드 적용 */
+    .bg-white,
+    .item-card,
+    #modal-item-detail > div,
+    #modal-privacy > div,
+    header,
+    .glass-nav {
+      background-color: #ffffff !important;
+      background-image: linear-gradient(0deg, #ffffff, #ffffff) !important;
+    }
+
+    .bg-slate-50 {
+      background-color: #f8fafc !important;
+      background-image: linear-gradient(0deg, #f8fafc, #f8fafc) !important;
+    }
+
+    .bg-blue-50 {
+      background-color: #eff6ff !important;
+      background-image: linear-gradient(0deg, #eff6ff, #eff6ff) !important;
+    }
+
+    .bg-blue-600 {
+      background-color: #2563eb !important;
+      background-image: linear-gradient(0deg, #2563eb, #2563eb) !important;
+      color: #ffffff !important;
+    }
+
+    .bg-blue-700 {
+      background-color: #1d4ed8 !important;
+      background-image: linear-gradient(0deg, #1d4ed8, #1d4ed8) !important;
+      color: #ffffff !important;
+    }
+
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.96) !important;
+      background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96)) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    /* 4. 폼 입력 요소의 다크모드 반전 방지 */
+    input, textarea, select {
+      color-scheme: only light !important;
+      background-color: #ffffff !important;
+      background-image: linear-gradient(0deg, #ffffff, #ffffff) !important;
+      color: #0f172a !important;
+    }
+
+    button {
+      color-scheme: only light !important;
+    }
+
+    /* 5. OS 및 브라우저 prefers-color-scheme: dark 완벽 무력화 */
+    @media (prefers-color-scheme: dark) {
+      :root, html, body {
+        color-scheme: only light !important;
+        background-color: #f8fafc !important;
+        background-image: linear-gradient(0deg, #f8fafc, #f8fafc) !important;
+        color: #0f172a !important;
+      }
+      .bg-white,
+      .item-card,
+      #modal-item-detail > div,
+      #modal-privacy > div,
+      header,
+      .glass-nav {
+        background-color: #ffffff !important;
+        background-image: linear-gradient(0deg, #ffffff, #ffffff) !important;
+      }
+      .bg-slate-50 {
+        background-color: #f8fafc !important;
+        background-image: linear-gradient(0deg, #f8fafc, #f8fafc) !important;
+      }
+      .bg-blue-50 {
+        background-color: #eff6ff !important;
+        background-image: linear-gradient(0deg, #eff6ff, #eff6ff) !important;
+      }
+      .bg-blue-600 {
+        background-color: #2563eb !important;
+        background-image: linear-gradient(0deg, #2563eb, #2563eb) !important;
+        color: #ffffff !important;
+      }
+    }
+
     .break-words {
       overflow-wrap: anywhere;
       word-break: break-word;
     }
-    .glass-nav {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-    }
+
     .hero-bg {
-      background: radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.08) 0%, rgba(248, 250, 252, 0) 70%);
+      background: radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.08) 0%, rgba(248, 250, 252, 0) 70%) !important;
     }
   </style>
 </head>
