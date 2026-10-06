@@ -1,14 +1,17 @@
-// Force only light mode & protect against mobile dark mode color inversion
+// Protect against mobile forced dark mode inversion
 try {
-  document.documentElement.style.setProperty('color-scheme', 'only light', 'important');
+  document.documentElement.style.setProperty('color-scheme', 'light dark');
+  document.documentElement.style.setProperty('forced-color-adjust', 'none');
 } catch (e) {}
 
 // Initialize Lucide icons
 document.addEventListener('DOMContentLoaded', () => {
   try {
-    document.documentElement.style.setProperty('color-scheme', 'only light', 'important');
+    document.documentElement.style.setProperty('color-scheme', 'light dark');
+    document.documentElement.style.setProperty('forced-color-adjust', 'none');
     if (document.body) {
-      document.body.style.setProperty('color-scheme', 'only light', 'important');
+      document.body.style.setProperty('color-scheme', 'light dark');
+      document.body.style.setProperty('forced-color-adjust', 'none');
     }
   } catch (e) {}
 

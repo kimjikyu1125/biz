@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>오픈케어 - 소상공인 5대 설비 제휴 비공개 혜택몰</title>
   
-  <!-- 모바일 기기 자체 테마(다크 모드 강제 반전 / Chromium Force Dark) 원천 차단 및 개발 고유 라이트 컬러 고정 -->
-  <meta name="color-scheme" content="only light" />
-  <meta name="supported-color-schemes" content="only light" />
+  <!-- 모바일(갤럭시/삼성 인터넷/크롬) 다크모드 강제 반전 원천 차단 및 브랜드 컬러 100% 고정 -->
+  <meta name="color-scheme" content="light dark" />
+  <meta name="supported-color-schemes" content="light dark" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="msapplication-navbutton-color" content="#ffffff" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   
   <!-- Pretendard Font -->
@@ -46,30 +47,83 @@
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
   <style>
-    /* 1. W3C & Chromium 공식 Force Dark(Auto Dark Theme) 옵트아웃 규격 */
+    /* 1. 삼성 인터넷 & Chromium 강제 다크모드 무력화 (네이티브 테마 지원 선언으로 강제 반전 필터 OFF) */
     :root {
-      color-scheme: only light !important;
-      supported-color-schemes: only light !important;
+      color-scheme: light dark !important;
+      supported-color-schemes: light dark !important;
+      forced-color-adjust: none !important;
+      -webkit-forced-color-adjust: none !important;
     }
+    
     *, *::before, *::after {
-      color-scheme: only light !important;
-      box-sizing: border-box;
+      forced-color-adjust: none !important;
+      -webkit-forced-color-adjust: none !important;
+      -webkit-tap-highlight-color: transparent !important; /* 모바일 터치(누를 때) 어두운 오버레이/반전 방지 */
     }
 
-    /* 2. 모바일 브라우저(삼성 인터넷, 안드로이드 크롬 등)의 배경색 반전 알고리즘 방어:
-       단색 background-color는 브라우저 엔진이 반전시키지만, linear-gradient 이미지는 그래픽으로 인식하여 반전을 건너뜁니다. */
     html, body {
       max-width: 100%;
       overflow-x: hidden;
-      color-scheme: only light !important;
+      color-scheme: light dark !important;
       background-color: #f8fafc !important;
-      background-image: linear-gradient(0deg, #f8fafc, #f8fafc) !important;
       color: #0f172a !important;
       font-family: 'Pretendard', sans-serif;
       word-break: keep-all;
     }
 
-    /* 3. 흰색 및 주요 컨테이너 배경 반전 쉴드 적용 */
+    /* 2. 파란색 텍스트 및 핵심 브랜드 컬러 WebKit 텍스트 채우기 보호 (절대 반전/탈색 불가) */
+    .text-blue-600,
+    .text-blue-700,
+    [class*="text-blue-600"],
+    [class*="text-blue-700"],
+    a.text-blue-600,
+    span.text-blue-600 {
+      color: #2563eb !important;
+      -webkit-text-fill-color: #2563eb !important;
+      forced-color-adjust: none !important;
+    }
+
+    .text-blue-500 {
+      color: #3b82f6 !important;
+      -webkit-text-fill-color: #3b82f6 !important;
+    }
+
+    .text-blue-800, .text-blue-900 {
+      color: #1e40af !important;
+      -webkit-text-fill-color: #1e40af !important;
+    }
+
+    /* 일반 텍스트 색상 보호 */
+    .text-slate-900 {
+      color: #0f172a !important;
+      -webkit-text-fill-color: #0f172a !important;
+    }
+    .text-slate-800 {
+      color: #1e293b !important;
+      -webkit-text-fill-color: #1e293b !important;
+    }
+    .text-slate-700 {
+      color: #334155 !important;
+      -webkit-text-fill-color: #334155 !important;
+    }
+    .text-slate-600 {
+      color: #475569 !important;
+      -webkit-text-fill-color: #475569 !important;
+    }
+    .text-slate-500 {
+      color: #64748b !important;
+      -webkit-text-fill-color: #64748b !important;
+    }
+    .text-slate-400 {
+      color: #94a3b8 !important;
+      -webkit-text-fill-color: #94a3b8 !important;
+    }
+    .text-white {
+      color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
+    }
+
+    /* 3. 배경색 보호 */
     .bg-white,
     .item-card,
     #modal-item-detail > div,
@@ -77,56 +131,88 @@
     header,
     .glass-nav {
       background-color: #ffffff !important;
-      background-image: linear-gradient(0deg, #ffffff, #ffffff) !important;
+      color: #0f172a !important;
     }
 
     .bg-slate-50 {
       background-color: #f8fafc !important;
-      background-image: linear-gradient(0deg, #f8fafc, #f8fafc) !important;
     }
-
+    .bg-slate-100 {
+      background-color: #f1f5f9 !important;
+    }
     .bg-blue-50 {
       background-color: #eff6ff !important;
-      background-image: linear-gradient(0deg, #eff6ff, #eff6ff) !important;
     }
-
+    .bg-blue-100 {
+      background-color: #dbeafe !important;
+    }
     .bg-blue-600 {
       background-color: #2563eb !important;
-      background-image: linear-gradient(0deg, #2563eb, #2563eb) !important;
       color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
     }
-
     .bg-blue-700 {
       background-color: #1d4ed8 !important;
-      background-image: linear-gradient(0deg, #1d4ed8, #1d4ed8) !important;
       color: #ffffff !important;
+      -webkit-text-fill-color: #ffffff !important;
     }
 
     .glass-nav {
       background: rgba(255, 255, 255, 0.96) !important;
-      background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96)) !important;
       backdrop-filter: blur(12px);
     }
 
-    /* 4. 폼 입력 요소의 다크모드 반전 방지 */
+    /* 4. 폼 입력창 보호 */
     input, textarea, select {
-      color-scheme: only light !important;
+      color-scheme: light dark !important;
       background-color: #ffffff !important;
-      background-image: linear-gradient(0deg, #ffffff, #ffffff) !important;
       color: #0f172a !important;
+      -webkit-text-fill-color: #0f172a !important;
     }
 
-    button {
-      color-scheme: only light !important;
-    }
-
-    /* 5. OS 및 브라우저 prefers-color-scheme: dark 완벽 무력화 */
+    /* 5. 브라우저/OS 다크모드 감지 시 원래 라이트 색상 100% 강제 고정 */
     @media (prefers-color-scheme: dark) {
       :root, html, body {
-        color-scheme: only light !important;
+        color-scheme: light dark !important;
         background-color: #f8fafc !important;
-        background-image: linear-gradient(0deg, #f8fafc, #f8fafc) !important;
         color: #0f172a !important;
+      }
+      .text-blue-600,
+      .text-blue-700,
+      [class*="text-blue-600"],
+      [class*="text-blue-700"],
+      a.text-blue-600,
+      span.text-blue-600 {
+        color: #2563eb !important;
+        -webkit-text-fill-color: #2563eb !important;
+      }
+      .text-slate-900 {
+        color: #0f172a !important;
+        -webkit-text-fill-color: #0f172a !important;
+      }
+      .text-slate-800 {
+        color: #1e293b !important;
+        -webkit-text-fill-color: #1e293b !important;
+      }
+      .text-slate-700 {
+        color: #334155 !important;
+        -webkit-text-fill-color: #334155 !important;
+      }
+      .text-slate-600 {
+        color: #475569 !important;
+        -webkit-text-fill-color: #475569 !important;
+      }
+      .text-slate-500 {
+        color: #64748b !important;
+        -webkit-text-fill-color: #64748b !important;
+      }
+      .text-slate-400 {
+        color: #94a3b8 !important;
+        -webkit-text-fill-color: #94a3b8 !important;
+      }
+      .text-white {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
       }
       .bg-white,
       .item-card,
@@ -135,21 +221,40 @@
       header,
       .glass-nav {
         background-color: #ffffff !important;
-        background-image: linear-gradient(0deg, #ffffff, #ffffff) !important;
+        color: #0f172a !important;
       }
       .bg-slate-50 {
         background-color: #f8fafc !important;
-        background-image: linear-gradient(0deg, #f8fafc, #f8fafc) !important;
+      }
+      .bg-slate-100 {
+        background-color: #f1f5f9 !important;
       }
       .bg-blue-50 {
         background-color: #eff6ff !important;
-        background-image: linear-gradient(0deg, #eff6ff, #eff6ff) !important;
+      }
+      .bg-blue-100 {
+        background-color: #dbeafe !important;
       }
       .bg-blue-600 {
         background-color: #2563eb !important;
-        background-image: linear-gradient(0deg, #2563eb, #2563eb) !important;
         color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
       }
+      .bg-blue-700 {
+        background-color: #1d4ed8 !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+      }
+    }
+
+    /* 6. 모달 내부 팝업 상세 내용 보호 */
+    #modal-item-detail,
+    #modal-item-detail * {
+      forced-color-adjust: none !important;
+    }
+    #detail-content .text-blue-600 {
+      color: #2563eb !important;
+      -webkit-text-fill-color: #2563eb !important;
     }
 
     .break-words {

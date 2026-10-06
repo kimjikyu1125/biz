@@ -33,11 +33,12 @@
     - ③ 포스기 (OKPOS): **비공개 제휴가 ~~월 35,000원~~ 월 0원~**
     - ④ 하이오더 (KT 테이블오더): **비공개 제휴가 ~~월 26,000원~~ 월 15,000원~**
     - ⑤ 정수기 (업소용·오피스): **비공개 제휴가 월 18,900원~**
-- **모바일/브라우저 자체 다크 모드 강제 반전 차단 및 고유 브랜드 컬러 고정 (2차 완벽 방어)**:
-  - Chromium 및 W3C 공식 규격인 `<meta name="color-scheme" content="only light">` 메타태그 적용 (일반 `light`와 달리 브라우저 렌더러의 Auto Dark Theme 강제 반전 알고리즘을 완벽하게 옵트아웃/차단)
-  - 삼성 인터넷 및 모바일 크롬의 단색 배경 반전(Luminance Inversion) 회피를 위해 `body`, `html`, 카드, 모달, 네비게이션 등에 `background-image: linear-gradient(...) !important` 그래픽 쉴드 적용
-  - CSS `:root, html, body, *` 전역에 `color-scheme: only light !important`, `supported-color-schemes: only light !important` 부여
-  - JavaScript 런타임 단계(`script.js`)에서도 `color-scheme: only light !important`를 동적 주입하여 어떠한 환경에서도 브랜드 고유 라이트 테마(화이트/블루/슬레이트)가 100% 온전히 유지되도록 방어 완료
+- **모바일/갤럭시(삼성 인터넷/크롬) 다크 모드 강제 반전 차단 및 브랜드 컬러 100% 보존**:
+  - 삼성 인터넷 브라우저가 다크 모드 시 강제 반전(Force Dark Inversion) 필터를 가동하는 원인인 라이트 단독 선언을 탈피하고, W3C 및 삼성 공식 규격인 `<meta name="color-scheme" content="light dark">` 적용 (브라우저에게 네이티브 테마 지원을 알려 강제 반전 필터를 전면 OFF)
+  - 브라우저 및 OS 레벨의 임의 색상 변환을 차단하는 W3C 표준 `forced-color-adjust: none !important;`, `-webkit-forced-color-adjust: none !important;` 전역 선언
+  - 파란색 텍스트(`.text-blue-600`, `월 요금`, `상세보기`, `배지`) 및 슬레이트 본문 텍스트에 `-webkit-text-fill-color`를 강제 부여하여 모바일 브라우저가 글자색을 흑백으로 뒤집거나 탈색시키지 못하도록 텍스트 채우기 레이어 완벽 잠금
+  - `@media (prefers-color-scheme: dark)`에서도 우리가 설계한 화이트 배경과 쨍한 블루 컬러가 100% 동일하게 출력되도록 1:1 강제 일치
+  - 모바일 터치/클릭 시 파란 글씨가 순간적으로 어둡게 반전되는 것을 막는 `-webkit-tap-highlight-color: transparent !important;` 적용 완료
 
 ---
 
