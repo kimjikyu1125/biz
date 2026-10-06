@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>오픈케어 - 소상공인 5대 설비 제휴 비공개 혜택몰</title>
   
+  <!-- 모바일 기기 자체 테마(다크 모드 강제 반전) 무시 및 개발 고유 컬러 고정 -->
+  <meta name="color-scheme" content="light" />
+  <meta name="supported-color-schemes" content="light" />
+  <meta name="theme-color" content="#ffffff" />
+  
   <!-- Pretendard Font -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   
@@ -12,6 +17,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class', // OS 및 브라우저의 prefers-color-scheme에 의한 자동 다크모드 변환 원천 차단
       theme: {
         extend: {
           fontFamily: {
@@ -39,9 +45,27 @@
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
   <style>
+    :root {
+      color-scheme: light !important;
+      supported-color-schemes: light !important;
+    }
     html, body {
       max-width: 100%;
       overflow-x: hidden;
+      color-scheme: light !important;
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+    }
+    /* 모바일 브라우저(삼성 인터넷, 크롬, 사파리 등)의 다크모드 강제 색상 반전 무력화 */
+    @media (prefers-color-scheme: dark) {
+      :root, html, body {
+        color-scheme: light !important;
+        background-color: #f8fafc !important;
+        color: #0f172a !important;
+      }
+    }
+    input, textarea, select, button {
+      color-scheme: light !important;
     }
     body {
       font-family: 'Pretendard', sans-serif;

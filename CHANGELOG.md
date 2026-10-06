@@ -33,7 +33,10 @@
     - ③ 포스기 (OKPOS): **비공개 제휴가 ~~월 35,000원~~ 월 0원~**
     - ④ 하이오더 (KT 테이블오더): **비공개 제휴가 ~~월 26,000원~~ 월 15,000원~**
     - ⑤ 정수기 (업소용·오피스): **비공개 제휴가 월 18,900원~**
-  - 모바일 반응형 최적화(flex-baseline)로 모든 기기에서 텍스트 겹침 없이 깔끔하게 노출
+- **모바일/브라우저 자체 다크 모드 강제 반전 차단 및 고유 브랜드 컬러 고정**:
+  - 스마트폰(삼성 인터넷, 안드로이드 크롬, iOS 사파리 등)의 '시스템 다크 모드'나 '웹페이지 다크 모드 강제 반전' 활성화 시에도 웹사이트 고유 디자인 색상이 왜곡되지 않도록 메타 태그(`<meta name="color-scheme" content="light">`, `<meta name="theme-color" content="#ffffff">`) 적용
+  - CSS `:root`, `html`, `body`, 폼 입력창에 `color-scheme: light !important`, `background-color: #f8fafc !important` 강제 부여 및 `@media (prefers-color-scheme: dark)` 무력화 처리 완료
+  - Tailwind CDN 설정에 `darkMode: 'class'`를 적용하여 OS 테마에 의한 자동 반전 원천 차단 완료
 
 ---
 
