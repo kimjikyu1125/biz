@@ -38,7 +38,10 @@
   - 브라우저 및 OS 레벨의 임의 색상 변환을 차단하는 W3C 표준 `forced-color-adjust: none !important;`, `-webkit-forced-color-adjust: none !important;` 전역 선언
   - 파란색 텍스트(`.text-blue-600`, `월 요금`, `상세보기`, `배지`) 및 슬레이트 본문 텍스트에 `-webkit-text-fill-color`를 강제 부여하여 모바일 브라우저가 글자색을 흑백으로 뒤집거나 탈색시키지 못하도록 텍스트 채우기 레이어 완벽 잠금
   - `@media (prefers-color-scheme: dark)`에서도 우리가 설계한 화이트 배경과 쨍한 블루 컬러가 100% 동일하게 출력되도록 1:1 강제 일치
-  - 모바일 터치/클릭 시 파란 글씨가 순간적으로 어둡게 반전되는 것을 막는 `-webkit-tap-highlight-color: transparent !important;` 적용 완료
+- **모바일 견적 폼 내 '설치 희망 주소' 네모칸 튀어나옴 해결 및 정렬 최적화**:
+  - 모바일(작은 스마트폰 화면)에서 `inquiry-form`의 패딩(`p-8` → `p-5 sm:p-8`) 및 주소 입력 그룹의 `min-w-0`, `truncate`, `box-border`를 적용
+  - '주소 검색 버튼을 눌러주세요' input 필드가 버튼 너비와 결합 시 폼 우측 밖으로 튀어나가던 Flexbox `min-width: auto` 현상을 `flex-1 min-w-0 w-full`로 완벽 억제
+  - 상단 라벨과 필수 안내 문구를 `flex-wrap items-baseline gap-1`로 유연 배치하여 모바일 기기에서도 일체의 수평 넘침 없이 정갈하게 100% 핏(Fit) 정렬 완료
 
 ---
 
