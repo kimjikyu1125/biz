@@ -138,8 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     internet: {
       brandBadge: '통신 3사 (KT · SKB · LGU+) 공식 제휴 파트너',
-      title: '인터넷 + 일반전화 - 통신 3사 비교 & 매장 결제안심 패키지',
-      serviceVal: '인터넷+일반전화',
+      title: '인터넷 + AI전화 - 통신 3사 비교 & 매장 결제안심 패키지',
+      serviceVal: '인터넷+AI전화',
       themeColor: 'indigo',
       intro: '통신 3사(KT, SKB, LGU+) 전 통신사를 공식 취급하여 대표님 스마트폰 결합 할인과 매장 위치별 최적 회선을 비교 매칭해 드립니다. 특히 결제 끊김을 원천 차단하는 0.3초 무선 백업과 24시간 AI 통화비서(LGU+ 주력 솔루션)를 특화 지원합니다.',
       images: [
