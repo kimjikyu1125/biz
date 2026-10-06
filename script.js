@@ -1,17 +1,17 @@
-// Protect against mobile forced dark mode inversion
+// Protect against mobile Chrome forced dark mode inversion (only light)
 try {
-  document.documentElement.style.setProperty('color-scheme', 'light dark');
-  document.documentElement.style.setProperty('forced-color-adjust', 'none');
+  document.documentElement.style.setProperty('color-scheme', 'only light', 'important');
+  document.documentElement.style.setProperty('forced-color-adjust', 'none', 'important');
 } catch (e) {}
 
 // Initialize Lucide icons
 document.addEventListener('DOMContentLoaded', () => {
   try {
-    document.documentElement.style.setProperty('color-scheme', 'light dark');
-    document.documentElement.style.setProperty('forced-color-adjust', 'none');
+    document.documentElement.style.setProperty('color-scheme', 'only light', 'important');
+    document.documentElement.style.setProperty('forced-color-adjust', 'none', 'important');
     if (document.body) {
-      document.body.style.setProperty('color-scheme', 'light dark');
-      document.body.style.setProperty('forced-color-adjust', 'none');
+      document.body.style.setProperty('color-scheme', 'only light', 'important');
+      document.body.style.setProperty('forced-color-adjust', 'none', 'important');
     }
   } catch (e) {}
 

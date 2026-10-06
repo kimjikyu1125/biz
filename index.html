@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>오픈케어 - 소상공인 5대 설비 제휴 비공개 혜택몰</title>
   
-  <!-- 모바일(갤럭시/삼성 인터넷/크롬) 다크모드 강제 반전 원천 차단 및 브랜드 컬러 100% 고정 -->
-  <meta name="color-scheme" content="light dark" />
-  <meta name="supported-color-schemes" content="light dark" />
+  <!-- 크롬 모바일(Chrome Android) Auto Dark Theme 공식 원천 차단 (W3C / Google Chrome 표준 규격) -->
+  <meta name="color-scheme" content="only light" />
+  <meta name="supported-color-schemes" content="only light" />
   <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#ffffff" />
   <meta name="msapplication-navbutton-color" content="#ffffff" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   
@@ -47,15 +48,16 @@
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
   <style>
-    /* 1. 삼성 인터넷 & Chromium 강제 다크모드 무력화 (네이티브 테마 지원 선언으로 강제 반전 필터 OFF) */
+    /* 1. Google Chrome & Chromium Auto Dark Theme 공식 Opt-out 규격 (only light) */
     :root {
-      color-scheme: light dark !important;
-      supported-color-schemes: light dark !important;
+      color-scheme: only light !important;
+      supported-color-schemes: only light !important;
       forced-color-adjust: none !important;
       -webkit-forced-color-adjust: none !important;
     }
     
     *, *::before, *::after {
+      color-scheme: only light !important;
       forced-color-adjust: none !important;
       -webkit-forced-color-adjust: none !important;
       -webkit-tap-highlight-color: transparent !important; /* 모바일 터치(누를 때) 어두운 오버레이/반전 방지 */
@@ -64,7 +66,7 @@
     html, body {
       max-width: 100%;
       overflow-x: hidden;
-      color-scheme: light dark !important;
+      color-scheme: only light !important;
       background-color: #f8fafc !important;
       color: #0f172a !important;
       font-family: 'Pretendard', sans-serif;
@@ -164,7 +166,7 @@
 
     /* 4. 폼 입력창 보호 */
     input, textarea, select {
-      color-scheme: light dark !important;
+      color-scheme: only light !important;
       background-color: #ffffff !important;
       color: #0f172a !important;
       -webkit-text-fill-color: #0f172a !important;
@@ -173,7 +175,7 @@
     /* 5. 브라우저/OS 다크모드 감지 시 원래 라이트 색상 100% 강제 고정 */
     @media (prefers-color-scheme: dark) {
       :root, html, body {
-        color-scheme: light dark !important;
+        color-scheme: only light !important;
         background-color: #f8fafc !important;
         color: #0f172a !important;
       }

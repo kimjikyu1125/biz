@@ -33,11 +33,11 @@
     - ③ 포스기 (OKPOS): **비공개 제휴가 ~~월 35,000원~~ 월 0원~**
     - ④ 하이오더 (KT 테이블오더): **비공개 제휴가 ~~월 26,000원~~ 월 15,000원~**
     - ⑤ 정수기 (업소용·오피스): **비공개 제휴가 월 18,900원~**
-- **모바일/갤럭시(삼성 인터넷/크롬) 다크 모드 강제 반전 차단 및 브랜드 컬러 100% 보존**:
-  - 삼성 인터넷 브라우저가 다크 모드 시 강제 반전(Force Dark Inversion) 필터를 가동하는 원인인 라이트 단독 선언을 탈피하고, W3C 및 삼성 공식 규격인 `<meta name="color-scheme" content="light dark">` 적용 (브라우저에게 네이티브 테마 지원을 알려 강제 반전 필터를 전면 OFF)
-  - 브라우저 및 OS 레벨의 임의 색상 변환을 차단하는 W3C 표준 `forced-color-adjust: none !important;`, `-webkit-forced-color-adjust: none !important;` 전역 선언
-  - 파란색 텍스트(`.text-blue-600`, `월 요금`, `상세보기`, `배지`) 및 슬레이트 본문 텍스트에 `-webkit-text-fill-color`를 강제 부여하여 모바일 브라우저가 글자색을 흑백으로 뒤집거나 탈색시키지 못하도록 텍스트 채우기 레이어 완벽 잠금
-  - `@media (prefers-color-scheme: dark)`에서도 우리가 설계한 화이트 배경과 쨍한 블루 컬러가 100% 동일하게 출력되도록 1:1 강제 일치
+- **크롬 모바일(Android Chrome) Auto Dark Theme 강제 다크모드 공식 차단 (`only light`)**:
+  - 구글 크롬 브라우저가 다크 모드 활성화 시 웹페이지를 강제 반전시키는 것을 원천 차단하기 위해 Google Chrome 공식 표준인 `<meta name="color-scheme" content="only light">` 및 `:root { color-scheme: only light !important; }` 적용
+  - 크롬 브라우저 상단 주소창까지 라이트 모드로 고정하는 `<meta name="theme-color" content="#ffffff">` 및 `<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#ffffff">` 추가
+  - 파란색 텍스트(`.text-blue-600`, 월 요금, 배지, 링크 등)에 `-webkit-text-fill-color: #2563eb !important;` 및 `forced-color-adjust: none !important;`를 적용하여 폰트 색상 강제 변환 차단
+  - `@media (prefers-color-scheme: dark)`에서도 `color-scheme: only light !important;` 및 라이트 모드 색상을 강제 고정하여 크롬에서 어떠한 색 반전도 발생하지 않도록 완전 방어
 - **모바일 견적 폼 내 '설치 희망 주소' 네모칸 튀어나옴 해결 및 정렬 최적화**:
   - 모바일(작은 스마트폰 화면)에서 `inquiry-form`의 패딩(`p-8` → `p-5 sm:p-8`) 및 주소 입력 그룹의 `min-w-0`, `truncate`, `box-border`를 적용
   - '주소 검색 버튼을 눌러주세요' input 필드가 버튼 너비와 결합 시 폼 우측 밖으로 튀어나가던 Flexbox `min-width: auto` 현상을 `flex-1 min-w-0 w-full`로 완벽 억제
